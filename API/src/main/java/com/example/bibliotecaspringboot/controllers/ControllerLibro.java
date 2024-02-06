@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/biblioteca/libro")
+@RequestMapping("/biblioteca/libros")
 public class ControllerLibro {
     @Autowired
     IRepositoryLibro repositoryLibro;
@@ -28,7 +28,7 @@ public class ControllerLibro {
             return  ResponseEntity.ok().body(libro.get());
         else return ResponseEntity.notFound().build();
     }
-    @GetMapping("/{id}")
+    @DeleteMapping ("/{id}")
     public ResponseEntity<?> borrarLibro(@PathVariable(value = "id") int id) {
         Optional<LibroDTO> empleado = repositoryLibro.findById(id);
         if (empleado.isPresent()) {
@@ -39,6 +39,7 @@ public class ControllerLibro {
         }
     }
 
+    @PutMapping("/{id}")
     public ResponseEntity<?> actualizarEmpleado(@RequestBody LibroDTO libroActualizado,
                                                 @PathVariable(value = "id") int id) {
         Optional<LibroDTO> empleado = repositoryLibro.findById(id);
