@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/biblioteca/historico")
 public class ControllerHistorico {
 
-    @Autowired
     IRepositoryHistorico repositoryHistorico;
+
+    @Autowired
+    public ControllerHistorico(IRepositoryHistorico repositoryHistorico) {
+        this.repositoryHistorico = repositoryHistorico;
+    }
 
     @GetMapping
     public String getHistorico(){

@@ -4,6 +4,7 @@ package com.example.bibliotecaspringboot.controllers;
 import com.example.bibliotecaspringboot.models.entities.CategoriaDTO;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryCategoria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +14,11 @@ import java.util.Optional;
 @RequestMapping("/biblioteca/categorias")
 public class ControllerCategoria {
 
-    @Autowired
     IRepositoryCategoria repositoryCategoria;
+    @Autowired
+    public ControllerCategoria(IRepositoryCategoria repositoryCategoria) {
+        this.repositoryCategoria = repositoryCategoria;
+    }
 
 
     @GetMapping
@@ -32,7 +36,7 @@ public class ControllerCategoria {
     }
 
     @PostMapping
-    public CategoriaDTO guardarCategoria(CategoriaDTO categoria) {
+    public CategoriaDTO guardarCategoria(@Validated @RequestBody CategoriaDTO categoria) {
         return repositoryCategoria.save(categoria);
     }
 
