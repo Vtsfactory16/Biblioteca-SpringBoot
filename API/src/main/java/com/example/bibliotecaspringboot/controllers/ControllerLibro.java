@@ -13,8 +13,11 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/biblioteca/libros")
 public class ControllerLibro {
-    @Autowired
     IRepositoryLibro repositoryLibro;
+    @Autowired
+    public ControllerLibro(IRepositoryLibro repositoryLibro) {
+        this.repositoryLibro = repositoryLibro;
+    }
 
 
     @GetMapping

@@ -4,6 +4,7 @@ package com.example.bibliotecaspringboot.controllers;
 import com.example.bibliotecaspringboot.models.entities.PrestamosDTO;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryPrestamos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +13,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/biblioteca/prestamos")
 public class ControllerPrestamos {
-    @Autowired
+
     IRepositoryPrestamos repositoryPrestamos;
+
+    @Autowired
+    public ControllerPrestamos(IRepositoryPrestamos repositoryPrestamos) {
+        this.repositoryPrestamos = repositoryPrestamos;
+    }
 
     @GetMapping
     public List<PrestamosDTO> buscarPrestamos() {
@@ -30,7 +36,7 @@ public class ControllerPrestamos {
     }
 
     @PostMapping
-    public PrestamosDTO guardarPrestamo(PrestamosDTO prestamo) {
+    public PrestamosDTO guardarPrestamo(@Validated @RequestBody PrestamosDTO prestamo) {
         return repositoryPrestamos.save(prestamo);
     }
 
