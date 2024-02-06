@@ -5,5 +5,5 @@
 - Microservicio en funcionamiento
 
 - Problemas: 
-    - (Unknown Column in Field List)[https://stackoverflow.com/questions/50567041/spring-boot-jpa-unknown-column-in-field-list]
-    - Etiqueta `@JsonIgnoreProperties`
+    - [Unknown Column in Field List](https://stackoverflow.com/questions/50567041/spring-boot-jpa-unknown-column-in-field-list)
+    - Etiqueta `@JsonIgnoreProperties` para evitar bucle infinito al generar el Json
