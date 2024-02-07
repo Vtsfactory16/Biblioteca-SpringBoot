@@ -22,7 +22,7 @@ public class PrestamosDTO {
     private LibroDTO libro;
     @ManyToOne
     @JoinColumn(name = "idusuario", referencedColumnName = "id")
-    @JsonIgnoreProperties("prestamos")
+    @JsonIgnoreProperties("prestamosById")
     private UsuarioDTO usuario;
 
     public int getIdPrestamo() {

@@ -20,7 +20,8 @@ public class UsuarioDTO {
     @Column(name = "apellidos", nullable = true, length = -1)
     private String apellidos;
     @OneToMany(mappedBy = "usuario")
-    @JsonIgnoreProperties("usuario")
+    @JsonIgnoreProperties({"usuario"})
+
     private Collection<PrestamosDTO> prestamosById;
 
     public int getId() {
