@@ -10,7 +10,8 @@ Content-Type: application/json
 <> 2024-01-31T091049.400.json
 <> 2024-01-31T090911.400.json
 
-###
+### GET REQUESTS
+
 GET http://localhost:8080/biblioteca/usuarios
 
 <> 2024-02-06T101745.500.json
@@ -23,7 +24,8 @@ GET http://localhost:8080/biblioteca/usuarios/1
 
 <> 2024-02-06T125334.200.json
 
-###
+### POST REQUESTS
+
 POST http://localhost:8080/biblioteca/usuarios
 Content-Type: application/json
 
@@ -41,47 +43,9 @@ GET http://localhost:8080/biblioteca/prestamos
 
 <> 2024-02-06T125644.200.json
 
-###
-POST http://localhost:8080/biblioteca/prestamos
-Content-Type: application/json
 
-{
-  "idPrestamo": 1,
-  "fechaPrestamo": "2021-04-17T16:02:50.000+00:00",
-  "libro": {
-    "id": 4,
-    "nombre": "Santa Tecla",
-    "autor": "Pepito",
-    "editorial": "Editorial 1",
-    "categoria": {
-      "id": 3,
-      "categoria": "Redes"
-    }
-  },
-  "usuario": {
-    "id": 2,
-    "nombre": "Maria",
-    "apellidos": "Andújar",
-    "prestamosById": [
-      {
-        "idPrestamo": 1,
-        "fechaPrestamo": "2021-04-17T16:02:50.000+00:00",
-        "libro": {
-          "id": 4,
-          "nombre": "Santa Tecla",
-          "autor": "Pepito",
-          "editorial": "Editorial 1",
-          "categoria": {
-            "id": 3,
-            "categoria": "Redes"
-          }
-        }
-      }
-    ]
-  }
-}
+### PRESTAMOS
 
-###
 POST http://localhost:8080/biblioteca/prestamos
 Content-Type: application/json
 
@@ -92,11 +56,36 @@ Content-Type: application/json
   "usuario":{"id": 2}
 }
 
-<> 2024-02-06T131337.200.json
-<> 2024-02-06T131324.500.json
-<> 2024-02-06T131220.500.json
-<> 2024-02-06T131144.500.json
-<> 2024-02-06T130600.200.json
-<> 2024-02-06T130356.200.json
-<> 2024-02-06T130317.200.json
-<> 2024-02-06T130055.200.json
+
+### LIBROS
+
+POST http://localhost:8080/biblioteca/libros
+Content-Type: application/json
+
+{
+  "nombre": "La princesa Prometida",
+  "autor": "William King",
+  "editorial": "emog",
+  "categoria": {"id": 9}
+}
+
+### CATEGORIAS
+
+
+POST http://localhost:8080/biblioteca/categorias
+Content-Type: application/json
+
+{
+ "categoria": "Ciencia fusión"
+}
+
+### USUARIOS
+
+POST http://localhost:8080/biblioteca/usuarios
+Content-Type: application/json
+
+{
+  "id": 24,
+  "nombre": "Vladi",
+  "apellidos": "Mort"
+}

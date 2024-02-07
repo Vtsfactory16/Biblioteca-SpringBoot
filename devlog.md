@@ -1,3 +1,16 @@
+# Diario de a bordo
+
+:feelsgood:
+
+
+### 2024-02-07
+
+- Microservicio probado con peticiones GET, POST PUT y DELETE
+- Arreglado método **POST**
+    - Línea `usuario.setId(0);`
+- Validación de las entidades
+    - `@Validated`, `@NotEmpty`, `@Size`
+- Arreglado `@JsonIgnore` de usuario
 
 ### 2024-02-06
 

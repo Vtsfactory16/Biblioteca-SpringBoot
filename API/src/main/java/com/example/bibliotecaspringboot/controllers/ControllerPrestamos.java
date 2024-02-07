@@ -37,6 +37,7 @@ public class ControllerPrestamos {
 
     @PostMapping
     public PrestamosDTO guardarPrestamo(@Validated @RequestBody PrestamosDTO prestamo) {
+        prestamo.setIdPrestamo(0);
         return repositoryPrestamos.save(prestamo);
     }
 
