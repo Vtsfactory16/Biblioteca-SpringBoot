@@ -1,7 +1,6 @@
 # Diario de a bordo
 
-:feelsgood:
-
+Nuestras hazañas y desgracias :feelsgood:
 
 ### 2024-02-07
 
@@ -16,7 +15,6 @@
 
 - Implementados **Repositorios** y **Controladores**
 - Microservicio en funcionamiento
-
 - Problemas: 
     - [Unknown Column in Field List](https://stackoverflow.com/questions/50567041/spring-boot-jpa-unknown-column-in-field-list)
     - Etiqueta `@JsonIgnoreProperties` para evitar bucle infinito al generar el Json
