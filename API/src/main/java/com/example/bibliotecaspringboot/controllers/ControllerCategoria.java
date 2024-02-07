@@ -37,6 +37,7 @@ public class ControllerCategoria {
 
     @PostMapping
     public CategoriaDTO guardarCategoria(@Validated @RequestBody CategoriaDTO categoria) {
+        categoria.setId(0);
         return repositoryCategoria.save(categoria);
     }
 

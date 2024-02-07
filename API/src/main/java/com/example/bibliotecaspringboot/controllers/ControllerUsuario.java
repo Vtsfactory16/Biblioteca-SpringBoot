@@ -39,7 +39,8 @@ public class ControllerUsuario {
 
     @PostMapping
     public UsuarioDTO saveUsuario(@Validated @RequestBody UsuarioDTO usuario) {
-        return usuarioRepository.save(usuario); // =)
+        usuario.setId(0);
+        return usuarioRepository.save(usuario);
     }
 
     @DeleteMapping("/{id}")

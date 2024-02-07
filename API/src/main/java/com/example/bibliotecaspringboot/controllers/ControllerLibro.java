@@ -33,8 +33,8 @@ public class ControllerLibro {
     }
     @DeleteMapping ("/{id}")
     public ResponseEntity<?> borrarLibro(@PathVariable(value = "id") int id) {
-        Optional<LibroDTO> empleado = repositoryLibro.findById(id);
-        if (empleado.isPresent()) {
+        Optional<LibroDTO> libro = repositoryLibro.findById(id);
+        if (libro.isPresent()) {
             repositoryLibro.deleteById(id);
             return ResponseEntity.ok().body("Borrado");
         } else {
@@ -45,14 +45,16 @@ public class ControllerLibro {
     @PutMapping("/{id}")
     public ResponseEntity<?> actualizarEmpleado(@RequestBody LibroDTO libroActualizado,
                                                 @PathVariable(value = "id") int id) {
-        Optional<LibroDTO> empleado = repositoryLibro.findById(id);
-        if (empleado.isPresent()) {
-            empleado.get().setNombre(libroActualizado.getNombre());
-            empleado.get().setCategoria(libroActualizado.getCategoria());
-            empleado.get().setAutor(libroActualizado.getAutor());
-            empleado.get().setEditorial(libroActualizado.getEditorial());
-            empleado.get().setPrestamos(libroActualizado.getPrestamos());
-            repositoryLibro.save(empleado.get());
+        Optional<LibroDTO> libroOptional = repositoryLibro.findById(id);
+        if (libroOptional.isPresent()) {
+            LibroDTO libro = libroOptional.get();
+
+            libro.setNombre(libroActualizado.getNombre());
+            libro.setCategoria(libroActualizado.getCategoria());
+            libro.setAutor(libroActualizado.getAutor());
+            libro.setEditorial(libroActualizado.getEditorial());
+            libro.setPrestamos(libroActualizado.getPrestamos());
+            repositoryLibro.save(libroOptional.get());
             return ResponseEntity.ok().body("Actualizado");
         } else {
             return ResponseEntity.notFound().build();
@@ -61,6 +63,7 @@ public class ControllerLibro {
 
     @PostMapping
     public LibroDTO guardarLibro(@Validated @RequestBody LibroDTO libro) {
+        libro.setId(0);
         return repositoryLibro.save(libro);
     }
 
