@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/biblioteca/libro")
+@RequestMapping("biblioteca/libro")
 public class ControllerLibro {
     @Autowired
     IRepositoryLibro repositoryLibro;
