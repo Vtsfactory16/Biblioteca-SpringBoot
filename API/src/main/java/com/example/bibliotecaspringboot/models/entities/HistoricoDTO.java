@@ -6,11 +6,11 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "historico", schema = "BIBLIOTECA", catalog = "")
+@Table(name = "historico", schema = "BIBLIOTECA")
 public class HistoricoDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idHistorico", nullable = false)
+    @Column(name = "idhistorico", nullable = false)
     private int idHistorico;
     @Basic
     @Column(name = "user", nullable = true, length = -1)

@@ -1,0 +1,102 @@
+
+###
+POST http://localhost:8080/proyecto_orm/empleado
+Content-Type: application/json
+
+
+
+<> 2024-01-31T091106.400.json
+<> 2024-01-31T091056.400.json
+<> 2024-01-31T091049.400.json
+<> 2024-01-31T090911.400.json
+
+###
+GET http://localhost:8080/biblioteca/usuarios
+
+<> 2024-02-06T101745.500.json
+
+###
+GET http://localhost:8080/prestamos
+
+###
+GET http://localhost:8080/biblioteca/usuarios/1
+
+<> 2024-02-06T125334.200.json
+
+###
+POST http://localhost:8080/biblioteca/usuarios
+Content-Type: application/json
+
+{
+  "nombre": "Avenido",
+  "apellidos": "Si no ",
+  "prestamosById": []
+}
+
+<> 2024-02-06T125515.200.json
+<> 2024-02-06T125437.200.json
+
+###
+GET http://localhost:8080/biblioteca/prestamos
+
+<> 2024-02-06T125644.200.json
+
+###
+POST http://localhost:8080/biblioteca/prestamos
+Content-Type: application/json
+
+{
+  "idPrestamo": 1,
+  "fechaPrestamo": "2021-04-17T16:02:50.000+00:00",
+  "libro": {
+    "id": 4,
+    "nombre": "Santa Tecla",
+    "autor": "Pepito",
+    "editorial": "Editorial 1",
+    "categoria": {
+      "id": 3,
+      "categoria": "Redes"
+    }
+  },
+  "usuario": {
+    "id": 2,
+    "nombre": "Maria",
+    "apellidos": "Andújar",
+    "prestamosById": [
+      {
+        "idPrestamo": 1,
+        "fechaPrestamo": "2021-04-17T16:02:50.000+00:00",
+        "libro": {
+          "id": 4,
+          "nombre": "Santa Tecla",
+          "autor": "Pepito",
+          "editorial": "Editorial 1",
+          "categoria": {
+            "id": 3,
+            "categoria": "Redes"
+          }
+        }
+      }
+    ]
+  }
+}
+
+###
+POST http://localhost:8080/biblioteca/prestamos
+Content-Type: application/json
+
+{
+  "idPrestamo": 0,
+  "fechaPrestamo": "2023-12-14",
+  "libro": {"id": 4},
+  "usuario":{"id": 2}
+}
+
+<> 2024-02-06T131337.200.json
+<> 2024-02-06T131324.500.json
+<> 2024-02-06T131220.500.json
+<> 2024-02-06T131144.500.json
+<> 2024-02-06T130600.200.json
+<> 2024-02-06T130356.200.json
+<> 2024-02-06T130317.200.json
+<> 2024-02-06T130055.200.json

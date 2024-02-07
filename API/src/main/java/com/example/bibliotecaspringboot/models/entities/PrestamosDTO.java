@@ -1,25 +1,28 @@
 package com.example.bibliotecaspringboot.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "prestamos", schema = "BIBLIOTECA", catalog = "")
+@Table(name = "prestamos", schema = "BIBLIOTECA")
 public class PrestamosDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idPrestamo", nullable = false)
+    @Column(name = "idprestamo", nullable = false)
     private int idPrestamo;
     @Basic
-    @Column(name = "fechaPrestamo", nullable = true)
+    @Column(name = "fechaprestamo", nullable = true)
     private Timestamp fechaPrestamo;
     @ManyToOne
-    @JoinColumn(name = "idLibro", referencedColumnName = "id")
+    @JoinColumn(name = "idlibro", referencedColumnName = "id")
+    @JsonIgnoreProperties("prestamos")
     private LibroDTO libro;
     @ManyToOne
-    @JoinColumn(name = "idUsuario", referencedColumnName = "id")
+    @JoinColumn(name = "idusuario", referencedColumnName = "id")
+    @JsonIgnoreProperties("prestamos")
     private UsuarioDTO usuario;
 
     public int getIdPrestamo() {

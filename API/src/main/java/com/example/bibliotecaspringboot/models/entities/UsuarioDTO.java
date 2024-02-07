@@ -1,12 +1,13 @@
 package com.example.bibliotecaspringboot.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "usuario", schema = "BIBLIOTECA", catalog = "")
+@Table(name = "usuario", schema = "BIBLIOTECA")
 public class UsuarioDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -19,6 +20,7 @@ public class UsuarioDTO {
     @Column(name = "apellidos", nullable = true, length = -1)
     private String apellidos;
     @OneToMany(mappedBy = "usuario")
+    @JsonIgnoreProperties("usuario")
     private Collection<PrestamosDTO> prestamosById;
 
     public int getId() {
