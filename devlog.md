@@ -2,6 +2,16 @@
 
 Nuestras hazañas y desgracias :feelsgood:
 
+### 2024-02-10
+
+- Aplicación cliente del proyecto anterior adaptada a este proyecto
+    - Eliminar librerías de **Hibernate** y **JDBC**
+    - Eliminar **DAOs**
+    - Adaptar **DTOs** (eliminar etiquetas JPA)
+    - Añadir librería para **json**
+    - Implementada función de **insertar usuarios**
+    - login desactivado temporalmente
+
 ### 2024-02-07
 
 - Microservicio probado con peticiones GET, POST PUT y DELETE
