@@ -52,7 +52,7 @@ public class ControllerPrestamos {
         }
     }
     @PutMapping("/{id}")
-    public String actualizarPrestamo(PrestamosDTO nuevoPrestamo, int idPrestamo) {
+    public String actualizarPrestamo(@Validated @RequestBody PrestamosDTO nuevoPrestamo, int idPrestamo) {
         Optional<PrestamosDTO> prestamo = repositoryPrestamos.findById(idPrestamo);
         if (prestamo.isPresent()) {
             prestamo.get().setFechaPrestamo(nuevoPrestamo.getFechaPrestamo());

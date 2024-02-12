@@ -152,7 +152,7 @@ public class FichaUsuario extends JInternalFrame implements VistaUsuario, Action
         if (e.getSource().equals(bSalir))
             salir();
         else if (e.getSource().equals(bGuardar)){
-                grabar();
+            grabar();
         } else if (e.getSource().equals(bBorrar)){
             borrar();
         }

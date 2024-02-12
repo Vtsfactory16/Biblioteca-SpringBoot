@@ -51,7 +51,7 @@ public class ControllerCategoria {
     }
 
     @PutMapping("/{id}")
-    public CategoriaDTO actualizarCategoria(CategoriaDTO nuevaCategoria, int idCategoria) {
+    public CategoriaDTO actualizarCategoria(@Validated @RequestBody CategoriaDTO nuevaCategoria, int idCategoria) {
         Optional<CategoriaDTO> categoria = repositoryCategoria.findById(idCategoria);
         if (categoria.isPresent()) {
             categoria.get().setCategoria(nuevaCategoria.getCategoria());

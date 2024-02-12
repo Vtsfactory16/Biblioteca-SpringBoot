@@ -1,5 +1,6 @@
 package modelo;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +12,20 @@ public class Usuario {
     private String nombre;
     private String apellidos;
     private Collection<Prestamo> prestamosById;
+
+    public Usuario() {
+    }
+
+    public Usuario(int id, String nombre, String apellidos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+    }
+
+    public Usuario(String nombre, String apellidos) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+    }
 
     public int getId() {
         return id;
@@ -64,4 +79,5 @@ public class Usuario {
                 .put("apellidos",apellidos)
                 .toString();
     }
+
 }
