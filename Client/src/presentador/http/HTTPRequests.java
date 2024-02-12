@@ -1,6 +1,5 @@
 package presentador.http;
 
-import modelo.Usuario;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,13 +14,14 @@ import java.util.Scanner;
  * Hay que hacer cambios porque ahora mismo solo puede insertar usuarios
  */
 public class HTTPRequests {
-    private static String postUrl = "http://localhost:8080/biblioteca/usuarios";
+    private static String baseUrl = "http://localhost:8080/biblioteca/";
 
-    public static boolean postRequest(String json) throws Exception {
+    public static boolean postRequest(String json, String endpoint) throws Exception {
+        String insertUrl = baseUrl + endpoint;
         boolean insertado = false;
         HttpURLConnection conn = null;
         try {
-            URL url = new URL(postUrl);
+            URL url = new URL(insertUrl);
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -33,7 +33,7 @@ public class HTTPRequests {
             }
             if (conn.getResponseCode() == 200)
                 insertado = true;
-            else postError(conn, postUrl);
+            else postError(conn, insertUrl);
         } finally {
             if (conn != null)
                 conn.disconnect();

@@ -15,7 +15,7 @@ public class PresentadorUsuario {
 
     public void inserta() throws Exception {
         // usuarioDAO.insertar(vistaUsuario.getUsuario());
-        HTTPRequests.postRequest(vistaUsuario.getUsuario().toJSON());
+        HTTPRequests.postRequest(vistaUsuario.getUsuario().toJSON(), "usuarios");
     }
 
     public void modifica() throws Exception {
