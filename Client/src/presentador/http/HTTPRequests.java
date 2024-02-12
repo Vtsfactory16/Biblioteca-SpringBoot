@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -54,5 +55,34 @@ public class HTTPRequests {
             String linea3 = jsonArray.getJSONObject(0).get("defaultMessage").toString();
             throw new Exception(String.format("%s\n%s\n%s\n", linea1, linea2,linea3));
         } else throw new Exception(String.format("%s\n%s\n", linea1,linea2 ));
+    }
+
+    /**
+     * @param endpoint Endpoint (usuarios, categorias, libros o prestamos).
+     * @param id ID del usuario, categoria, libro o el prestamo.
+     */
+    private static boolean putRequest(String json, String endpoint, int id) throws Exception {
+        String insertUrl = String.format("%s%s/%d",baseUrl,endpoint,id);
+        boolean updated = false;
+        HttpURLConnection conn = null;
+        try {
+            URL url = new URL(insertUrl);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = json.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+            if (conn.getResponseCode() == 200)
+                updated = true;
+            else postError(conn, insertUrl);
+        } finally {
+            if (conn != null)
+                conn.disconnect();
+        }
+        return updated;
     }
 }

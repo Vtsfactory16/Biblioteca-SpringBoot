@@ -8,6 +8,7 @@ public class PresentadorUsuario {
     public PresentadorUsuario(VistaUsuario vistaUsuario) {
         this.vistaUsuario = vistaUsuario;
     }
+    private final String ENDPOINT = "usuarios";
 
     public void borra() throws Exception {
         // usuarioDAO.borrar(vistaUsuario.getUsuario().getId());
@@ -15,7 +16,7 @@ public class PresentadorUsuario {
 
     public void inserta() throws Exception {
         // usuarioDAO.insertar(vistaUsuario.getUsuario());
-        HTTPRequests.postRequest(vistaUsuario.getUsuario().toJSON(), "usuarios");
+        HTTPRequests.postRequest(vistaUsuario.getUsuario().toJSON(), ENDPOINT);
     }
 
     public void modifica() throws Exception {
@@ -24,6 +25,7 @@ public class PresentadorUsuario {
 
     public void listaAllUsuarios() throws Exception {
         VistaUsuarios vistaUsuarios = (VistaUsuarios) vistaUsuario;
+
         // vistaUsuarios.setUsuarios(usuarioDAO.leerAllUsuarios());
     }
 
