@@ -30,24 +30,18 @@ public class LibroRequests {
         }
     }
 
-    public static List<Libro> getLibros() {
+    public static List<Libro> getLibros() throws Exception {
         String json = HTTPRequests.getRequest(Constants.BASE_URL + "libros/");
-        // TODO: json to user list
+
         //una jar para mappear cosas, en este caso json a la clase que tenemos
         ObjectMapper objectMapper = new ObjectMapper();
-
-
         List<Libro> libroList = new ArrayList<>();
 
         try {
-
             Libro[] libros = objectMapper.readValue(json, Libro[].class);
-
-
             for (Libro libro : libros) {
                 libroList.add(libro);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

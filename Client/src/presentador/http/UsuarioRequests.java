@@ -10,7 +10,6 @@ public class UsuarioRequests {
     public static void postUser(Usuario usuario) throws Exception {
         String jsonResponse = HTTPRequests.postRequest(usuario.toJSON(), Constants.BASE_URL+"usuarios"); // Petición http
         JSONObject object = new JSONObject(jsonResponse);
-
         if (object.has("id")) {
             usuario.setId(object.getInt("id")); // Actualizar la ID del usuario
         } else  {

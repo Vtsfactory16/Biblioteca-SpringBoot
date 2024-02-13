@@ -13,7 +13,6 @@ public class PresentadorCategoria {
 
     private final String ENDPOINT = "categorias";
     public void borra() throws Exception {
-
         CategoriaRequests.deleteCategoria(vistaCategoria.getCategoria());
     }
 
@@ -28,7 +27,7 @@ public class PresentadorCategoria {
     }
 
     public void listaAllCategorias() throws Exception {
-
-
+        VistaCategorias vistaCategorias = (VistaCategorias) vistaCategoria;
+        vistaCategorias.setCategorias(CategoriaRequests.getCategorias());
     }
 }

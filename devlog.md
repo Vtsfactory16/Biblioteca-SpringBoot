@@ -2,6 +2,11 @@
 
 Nuestras hazañas y desgracias :feelsgood:
 
+### 2024-02-13
+
+- Peticiones HTTP al API REST.
+- Object Mapping (Pasar objetos a JSON y JSON a objetos)
+
 ### 2024-02-10
 
 - Aplicación cliente del proyecto anterior adaptada a este proyecto

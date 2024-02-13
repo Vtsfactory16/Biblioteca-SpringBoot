@@ -27,6 +27,7 @@ public class CategoriaRequests {
         }
         return jsonResponse;
     }
+
     public static String putCategoria(Categoria categoria) throws Exception {
         String jsonResponse = HTTPRequests.putRequest(categoria.toJson(), Constants.BASE_URL+"categorias/" + categoria.getId()); // Petición http
         System.out.println(jsonResponse);
@@ -36,6 +37,7 @@ public class CategoriaRequests {
         }
         return jsonResponse;
     }
+
     public static List<Categoria> getCategorias()  throws Exception {
         String json = HTTPRequests.getRequest(Constants.BASE_URL + "categorias/");
         return new ArrayList<>();
@@ -48,6 +50,5 @@ public class CategoriaRequests {
             HTTPRequests.logError(object);
         }
     }
-
 
 }
