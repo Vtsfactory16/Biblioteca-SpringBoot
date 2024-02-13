@@ -1,5 +1,8 @@
 package modelo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -52,5 +55,22 @@ public class Prestamo {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String toJSON() throws JSONException {
+        JSONObject jsonPrestamo = new JSONObject()
+                .put("idPrestamo", idPrestamo)
+                .put("fechaprestamo", fechaPrestamo);
+
+        if (libro != null) {
+            // Para insertar, solo necesitamos la id de estos objetos
+            JSONObject jsonLibro = new JSONObject().put("id", libro.getId());
+            jsonPrestamo.put("libro", jsonLibro);
+        }
+        if (usuario != null) {
+            JSONObject jsonUsuario = new JSONObject().put("id", usuario.getId());
+            jsonPrestamo.put("usuario", jsonUsuario);
+        }
+        return jsonPrestamo.toString();
     }
 }
