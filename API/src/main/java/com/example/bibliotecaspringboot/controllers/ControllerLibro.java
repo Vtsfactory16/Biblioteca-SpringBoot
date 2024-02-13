@@ -43,7 +43,7 @@ public class ControllerLibro {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarEmpleado(@RequestBody LibroDTO libroActualizado,
+    public ResponseEntity<?> actualizarEmpleado(@Validated @RequestBody LibroDTO libroActualizado,
                                                 @PathVariable(value = "id") int id) {
         Optional<LibroDTO> libroOptional = repositoryLibro.findById(id);
         if (libroOptional.isPresent()) {

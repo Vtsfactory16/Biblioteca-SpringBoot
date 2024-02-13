@@ -48,13 +48,13 @@ public class ControllerUsuario {
         Optional<UsuarioDTO> usuario = usuarioRepository.findById(idUsuario);
         if (usuario.isPresent()) {
             usuarioRepository.deleteById(idUsuario);
-            return ResponseEntity.ok().body("Usuario Borrado");
+            return ResponseEntity.ok().body("{\"status\": \"Usuario Eliminado\"}");
         }
         return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUsuario(@RequestBody UsuarioDTO newUsuario,
+    public ResponseEntity<?> updateUsuario(@Validated @RequestBody UsuarioDTO newUsuario,
                                            @PathVariable(value = "id") Integer idUsuario) {
         Optional<UsuarioDTO> usuarioOptional = usuarioRepository.findById(idUsuario);
         if (usuarioOptional.isPresent()) {
@@ -62,7 +62,7 @@ public class ControllerUsuario {
             usuario.setNombre(newUsuario.getNombre());
             usuario.setApellidos(newUsuario.getApellidos());
             usuarioRepository.save(usuario);
-            return ResponseEntity.ok().body("Usuario Actualizado");
+            return ResponseEntity.ok().body("{\"status\": \"Usuario Actualizado\"}");
         }
         return ResponseEntity.notFound().build();
     }

@@ -1,6 +1,6 @@
 package presentador;
 
-import presentador.http.HTTPRequests;
+import presentador.http.UsuarioRequests;
 
 public class PresentadorUsuario {
     private VistaUsuario vistaUsuario;
@@ -8,23 +8,23 @@ public class PresentadorUsuario {
     public PresentadorUsuario(VistaUsuario vistaUsuario) {
         this.vistaUsuario = vistaUsuario;
     }
+    private final String ENDPOINT = "usuarios";
 
     public void borra() throws Exception {
-        // usuarioDAO.borrar(vistaUsuario.getUsuario().getId());
+        UsuarioRequests.deleteUser(vistaUsuario.getUsuario());
     }
 
     public void inserta() throws Exception {
-        // usuarioDAO.insertar(vistaUsuario.getUsuario());
-        HTTPRequests.postRequest(vistaUsuario.getUsuario().toJSON(), "usuarios");
+        UsuarioRequests.postUser(vistaUsuario.getUsuario());
     }
 
     public void modifica() throws Exception {
-        // usuarioDAO.modificar(vistaUsuario.getUsuario());
+        UsuarioRequests.putUser(vistaUsuario.getUsuario());
     }
 
     public void listaAllUsuarios() throws Exception {
         VistaUsuarios vistaUsuarios = (VistaUsuarios) vistaUsuario;
-        // vistaUsuarios.setUsuarios(usuarioDAO.leerAllUsuarios());
+        vistaUsuarios.setUsuarios(UsuarioRequests.getUsers());
     }
 
     public void leerUsuariosOR(int id,String nombre,String apellidos) throws Exception {
