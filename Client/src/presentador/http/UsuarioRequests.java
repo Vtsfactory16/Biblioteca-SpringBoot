@@ -28,7 +28,7 @@ public class UsuarioRequests {
         }
     }
 
-    public static List<Usuario> getUsers() {
+    public static List<Usuario> getUsers()  throws Exception{
         String json = HTTPRequests.getRequest(Constants.BASE_URL + "usuarios/");
         // TODO: json to user list
         return new ArrayList<>();
