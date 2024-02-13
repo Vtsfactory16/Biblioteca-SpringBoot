@@ -1,6 +1,6 @@
 package presentador;
 
-import presentador.http.UserRequests;
+import presentador.http.UsuarioRequests;
 
 public class PresentadorUsuario {
     private VistaUsuario vistaUsuario;
@@ -11,20 +11,20 @@ public class PresentadorUsuario {
     private final String ENDPOINT = "usuarios";
 
     public void borra() throws Exception {
-        UserRequests.deleteUser(vistaUsuario.getUsuario());
+        UsuarioRequests.deleteUser(vistaUsuario.getUsuario());
     }
 
     public void inserta() throws Exception {
-        UserRequests.postUser(vistaUsuario.getUsuario());
+        UsuarioRequests.postUser(vistaUsuario.getUsuario());
     }
 
     public void modifica() throws Exception {
-        UserRequests.putUser(vistaUsuario.getUsuario());
+        UsuarioRequests.putUser(vistaUsuario.getUsuario());
     }
 
     public void listaAllUsuarios() throws Exception {
         VistaUsuarios vistaUsuarios = (VistaUsuarios) vistaUsuario;
-        vistaUsuarios.setUsuarios(UserRequests.getUsers());
+        vistaUsuarios.setUsuarios(UsuarioRequests.getUsers());
     }
 
     public void leerUsuariosOR(int id,String nombre,String apellidos) throws Exception {

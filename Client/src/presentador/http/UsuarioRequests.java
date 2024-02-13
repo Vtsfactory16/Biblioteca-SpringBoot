@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRequests {
+public class UsuarioRequests {
     public static void postUser(Usuario usuario) throws Exception {
         String jsonResponse = HTTPRequests.postRequest(usuario.toJSON(), Constants.BASE_URL+"usuarios"); // Petición http
         System.out.println(jsonResponse);
