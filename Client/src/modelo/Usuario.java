@@ -79,5 +79,4 @@ public class Usuario {
                 .put("apellidos",apellidos)
                 .toString();
     }
-
 }

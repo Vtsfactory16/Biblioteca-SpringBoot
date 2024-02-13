@@ -9,7 +9,6 @@ import java.util.List;
 public class UsuarioRequests {
     public static void postUser(Usuario usuario) throws Exception {
         String jsonResponse = HTTPRequests.postRequest(usuario.toJSON(), Constants.BASE_URL+"usuarios"); // Petición http
-        System.out.println(jsonResponse);
         JSONObject object = new JSONObject(jsonResponse);
 
         if (object.has("id")) {
@@ -21,7 +20,6 @@ public class UsuarioRequests {
 
     public static void putUser(Usuario usuario) throws Exception {
         String jsonResponse = HTTPRequests.putRequest(usuario.toJSON(), Constants.BASE_URL+"usuarios/" + usuario.getId()); // Petición http
-        System.out.println(jsonResponse);
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
             HTTPRequests.logError(object);
