@@ -1,5 +1,8 @@
 package modelo;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Collection;
 import java.util.Objects;
 
@@ -78,5 +81,15 @@ public class Libro {
 
     public void setCategoriaId(int id) {
         categoria.setId(id);
+    }
+
+    public String toJSON() throws JSONException {
+        return new JSONObject()
+                .put("id", id)
+                .put("nombre", nombre)
+                .put("autor",autor)
+                .put("editorial",editorial)
+                .put("prestamos",prestamos)
+                .toString();
     }
 }
