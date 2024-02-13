@@ -1,6 +1,9 @@
 package modelo;
 
 
+import netscape.javascript.JSObject;
+import org.json.JSONObject;
+
 import java.util.Collection;
 import java.util.Objects;
 
@@ -44,5 +47,12 @@ public class Categoria {
 
     public void setLibros(Collection<Libro> libros) {
         this.libros = libros;
+    }
+
+    public String toJson() throws Exception {
+        return new JSONObject()
+                .put("id", id)
+                .put("categoria", categoria).
+                toString();
     }
 }
