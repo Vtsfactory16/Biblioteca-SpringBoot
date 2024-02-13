@@ -1,5 +1,7 @@
 package presentador;
 
+import modelo.Categoria;
+import presentador.http.CategoriaRequests;
 import presentador.http.HTTPRequests;
 
 public class PresentadorCategoria {
@@ -9,29 +11,24 @@ public class PresentadorCategoria {
         this.vistaCategoria = vistaCategoria;
     }
 
+    private final String ENDPOINT = "categorias";
     public void borra() throws Exception {
 
-        // categoriaDAO.borrar(vistaCategoria.getCategoria().getId());
-        // TODO: Petición http DELETE de categoria
+        CategoriaRequests.deleteCategoria(vistaCategoria.getCategoria());
     }
 
 
     //Probado y correcto
     public void inserta() throws Exception {
-    HTTPRequests.postRequest(vistaCategoria.getCategoria().toJson(), "categorias");
-        // categoriaDAO.inserta(vistaCategoria.getCategoria());
-        // TODO: Petición http POST de categoria
+        CategoriaRequests.postCategoria(vistaCategoria.getCategoria());
     }
 
     public void modifica() throws Exception {
-        // categoriaDAO.modificar(vistaCategoria.getCategoria());
-        // TODO: Petición http POST de categoria
+        CategoriaRequests.putCategoria(vistaCategoria.getCategoria());
     }
 
     public void listaAllCategorias() throws Exception {
 
-        // VistaCategorias vistaCategorias = (VistaCategorias) vistaCategoria;
-        // vistaCategorias.setCategorias(categoriaDAO.leerAllCategorias());
-        // TODO: Petición http GET de categoria
+
     }
 }
