@@ -2,6 +2,9 @@ package presentador;
 
 
 import excepciones.CampoVacioExcepcion;
+import modelo.Libro;
+import presentador.http.CategoriaRequests;
+import presentador.http.LibroRequests;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,29 +18,24 @@ public class PresentadorLibro {
     }
 
     public void borra() throws Exception {
-        // libroDAO.borrar(vistaLibro.getLibro().getId());
-        // TODO: Petición http DELETE de libro
+        LibroRequests.deleteLibro(vistaLibro.getLibro());
     }
 
     public void inserta() throws Exception {
-        // libroDAO.insertar(vistaLibro.getLibro());
-        // TODO: Petición http POST de libro
+        LibroRequests.postLibro(vistaLibro.getLibro());
     }
 
     public void modifica() throws Exception {
-        // libroDAO.modificar(vistaLibro.getLibro());
-        // TODO: Petición http PUT de libro
+        LibroRequests.putLibro(vistaLibro.getLibro());
     }
 
     public void listaAllLibros() throws Exception {
         VistaLibros vistaLibros = (VistaLibros) vistaLibro;
-        // vistaLibros.setLibros(libroDAO.leerAllLibros());
-        // TODO: Petición http GET de libro
+        vistaLibros.setLibros(LibroRequests.getLibros());
     }
 
-    public void listaAllCategorias() {
-       // vistaLibro.setCategorias(categoriaDAO.leerAllCategorias());
-        // TODO: Petición http GET de libro
+    public void listaAllCategorias() throws Exception {
+        vistaLibro.setCategorias(CategoriaRequests.getCategorias());
     }
 
     public void leerLibrosOR(int id, String titulo, String autor, String editorial, int categoria) throws Exception {

@@ -2,10 +2,11 @@ package presentador.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import modelo.Libro;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LibroRequests {
@@ -17,7 +18,7 @@ public class LibroRequests {
         if (object.has("id")) {
             libro.setId(object.getInt("id")); // Actualizar la ID del usuario
         } else  {
-            HTTPRequests.logError(object);
+            HTTPRequests.throwException(object);
         }
     }
 
@@ -26,33 +27,23 @@ public class LibroRequests {
         System.out.println(jsonResponse);
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
-            HTTPRequests.logError(object);
+            HTTPRequests.throwException(object);
         }
     }
 
     public static List<Libro> getLibros() throws Exception {
-        String json = HTTPRequests.getRequest(Constants.BASE_URL + "libros/");
+        String json = HTTPRequests.getRequest(Constants.BASE_URL + "libros");
 
-        //una jar para mappear cosas, en este caso json a la clase que tenemos
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Libro> libroList = new ArrayList<>();
-
-        try {
-            Libro[] libros = objectMapper.readValue(json, Libro[].class);
-            for (Libro libro : libros) {
-                libroList.add(libro);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return libroList;
+        ObjectMapper objectMapper = new ObjectMapper(); // Pasar de json a objetos
+        Libro[] libros = objectMapper.readValue(json, Libro[].class);
+        return Arrays.asList(libros);
     }
 
     public static void deleteLibro(Libro usuario) throws Exception {
-        String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "libros/" + usuario.getId() );
+        String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "libros" + usuario.getId() );
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
-            HTTPRequests.logError(object);
+            HTTPRequests.throwException(object);
         }
     }
 }

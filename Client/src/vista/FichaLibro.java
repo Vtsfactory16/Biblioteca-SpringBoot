@@ -136,13 +136,17 @@ public class FichaLibro extends JInternalFrame implements VistaLibro, ActionList
     }
 
     @Override
-    public void setPresentador(PresentadorLibro presentador) {
+    public void setPresentador(PresentadorLibro presentador) throws Exception {
         this.presentador=presentador;
         presentador.listaAllCategorias();
     }
 
     public void updateCategorias() {
-        presentador.listaAllCategorias();
+        try {
+            presentador.listaAllCategorias();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     @Override
     public void setCategorias(List<Categoria> categorias) {
@@ -211,7 +215,7 @@ public class FichaLibro extends JInternalFrame implements VistaLibro, ActionList
             getLibro().setEditorial(eEditorial.getText());
             Categoria categoria=(Categoria) cbCategoria.getSelectedItem();
             if (categoria!=null)
-                getLibro().setCategoriaId(categoria.getId());
+                getLibro().setCategoria(categoria);
             if (getLibro().getId()==0) {
                 presentador.inserta();
                 actualizaformulario();

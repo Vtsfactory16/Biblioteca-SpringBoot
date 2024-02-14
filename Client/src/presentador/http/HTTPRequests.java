@@ -11,13 +11,15 @@ import java.net.http.HttpResponse;
 
 public class HTTPRequests {
 
-    public static void logError(JSONObject object) throws Exception {
+    public static void throwException(JSONObject object) throws Exception {
         String linea1 = String.format("Error: %s (%s)\n%s",object.get("error"), object.get("status"), object.get("message"));
         if (object.has("errors")) {
             JSONArray jsonArray = object.getJSONArray("errors");
             String linea2 = jsonArray.getJSONObject(0).get("defaultMessage").toString();
             throw new Exception(String.format("%s\n%s\n", linea1, linea2));
-        } else throw new Exception(String.format("%s\n", linea1 ));
+        } else {
+            throw new Exception(String.format("%s\n", linea1));
+        }
 
     }
 

@@ -1,15 +1,11 @@
 package presentador.http;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import modelo.Categoria;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CategoriaRequests {
@@ -23,7 +19,7 @@ public class CategoriaRequests {
         if (object.has("id")) {
             categoria.setId(object.getInt("id")); // Actualizar la ID del usuario
         } else  {
-            HTTPRequests.logError(object);
+            HTTPRequests.throwException(object);
         }
         return jsonResponse;
     }
@@ -33,21 +29,23 @@ public class CategoriaRequests {
         System.out.println(jsonResponse);
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
-            HTTPRequests.logError(object);
+            HTTPRequests.throwException(object);
         }
         return jsonResponse;
     }
 
     public static List<Categoria> getCategorias()  throws Exception {
-        String json = HTTPRequests.getRequest(Constants.BASE_URL + "categorias/");
-        return new ArrayList<>();
+        String json = HTTPRequests.getRequest(Constants.BASE_URL + "categorias");
+        ObjectMapper objectMapper = new ObjectMapper();
+        Categoria[] categorias = objectMapper.readValue(json, Categoria[].class);
+        return Arrays.asList(categorias);
     }
 
     public static void deleteCategoria(Categoria categoria) throws Exception {
         String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "categorias/" + categoria.getId() );
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
-            HTTPRequests.logError(object);
+            HTTPRequests.throwException(object);
         }
     }
 

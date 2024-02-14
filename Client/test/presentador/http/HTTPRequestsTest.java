@@ -19,6 +19,11 @@ class HTTPRequestsTest {
     }
 
     @Test
+    void getLibros() throws Exception {
+        System.out.println(LibroRequests.getLibros());
+    }
+
+    @Test
     void jsonToList() {
 
         // Sample JSON string
