@@ -27,5 +27,25 @@ una aplicación **cliente** desarrollada en Java Swing.
 
 ### Aplicación Spring Boot
 
+  # Creación de controladores:
+    - Controlador Usuario
+    - Controlador Categoría
+    - Controlador Histórico
+    - Controlador Libro
+    - Controlador Prestamos
+    
+
 ### Aplicación Cliente
+
+  # Creación de HTTPRequests:
+    - Request Categoría
+    - Request Libro
+    - Request Prestamos
+    - Request Usuario
+
+ # Creación de CRUD Cliente:
+   - Presentador Usuario
+   - Presentador Libro
+   - Presentador Categoría
+   - Presentador Prestamos
 
