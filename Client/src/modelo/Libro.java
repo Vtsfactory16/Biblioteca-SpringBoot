@@ -84,6 +84,7 @@ public class Libro {
     }
 
     public String toJSON() throws JSONException {
+        // TODO: Estos libros se están insertando sin categoría
         return new JSONObject()
                 .put("id", id)
                 .put("nombre", nombre)
@@ -91,5 +92,17 @@ public class Libro {
                 .put("editorial",editorial)
                 .put("prestamos",prestamos)
                 .toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", autor='" + autor + '\'' +
+                ", editorial='" + editorial + '\'' +
+                ", categoria=" + categoria +
+                ", prestamos=" + prestamos +
+                '}';
     }
 }

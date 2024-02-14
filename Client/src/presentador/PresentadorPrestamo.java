@@ -1,5 +1,8 @@
 package presentador;
 
+import presentador.http.CategoriaRequests;
+import presentador.http.PrestamoRequests;
+
 public class PresentadorPrestamo {
     private VistaPrestamo vistaPrestamo;
 
@@ -8,29 +11,24 @@ public class PresentadorPrestamo {
     }
 
     public void borra() throws Exception {
-        // prestamoDAO.borrar(vistaPrestamo.getPrestamo().getId());
-        // TODO: Petición http DELETE de prestamo
+        PrestamoRequests.deletePrestamo(vistaPrestamo.getPrestamo());
     }
 
     public void inserta() throws Exception {
-        // prestamoDAO.insertar(vistaPrestamo.getPrestamo());
-        // TODO: Petición http POST de prestamo
+        PrestamoRequests.postPrestamo(vistaPrestamo.getPrestamo());
     }
 
     public void modifica() throws Exception {
-        // prestamoDAO.modificar(vistaPrestamo.getPrestamo());
-        // TODO: Petición http PUT de prestamo
+        PrestamoRequests.putPrestamo(vistaPrestamo.getPrestamo());
     }
 
     public void listaAllPrestamos() throws Exception {
-        // VistaPrestamos vistaPrestamos = (VistaPrestamos) vistaPrestamo;
-        // vistaPrestamos.setPrestamos(prestamoDAO.leerAllPrestamos());
-        // TODO: Petición http GET de prestamo
+        VistaPrestamos vistaPrestamos = (VistaPrestamos) vistaPrestamo;
+        vistaPrestamos.setPrestamos(PrestamoRequests.getPrestamos());
     }
 
-    public void listaAllCategorias() {
-        // vistaPrestamo.setCategorias(categoriaDAO.leerAllCategorias());
-        // TODO: Petición http GET de prestamo
+    public void listaAllCategorias() throws Exception {
+        vistaPrestamo.setCategorias(CategoriaRequests.getCategorias());
     }
 
 }

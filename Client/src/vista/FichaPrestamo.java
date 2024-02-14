@@ -43,7 +43,11 @@ public class FichaPrestamo extends JInternalFrame implements VistaPrestamo, Acti
         pCheckLibro.add(ckEditorial);
     }
     public void updateCategorias() {
-        presentador.listaAllCategorias();
+        try {
+            presentador.listaAllCategorias();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
     private JComboBox cbCategoria=new JComboBox();{
         cbCategoria.addFocusListener(this);
@@ -212,7 +216,7 @@ public class FichaPrestamo extends JInternalFrame implements VistaPrestamo, Acti
     }
 
     @Override
-    public void setPresentador(PresentadorPrestamo presentador){
+    public void setPresentador(PresentadorPrestamo presentador) throws Exception {
         this.presentador=presentador;
         presentador.listaAllCategorias(); // rellena el menú desplegable de categorías
     }

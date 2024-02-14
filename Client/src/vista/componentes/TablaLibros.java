@@ -28,7 +28,7 @@ public class TablaLibros extends JTable  {
             datos[i][1] = libro.getNombre();
             datos[i][2] = libro.getAutor();
             datos[i][3] = libro.getEditorial();
-            datos[i][4] = libro.getNombreCategoria();
+            datos[i][4] = libro.getCategoria() == null ? "Sin categoría" : libro.getNombreCategoria();
             i++;
         }
         setModel(new MiModeloDatosSoloLectura(datos, nombreColumnas));
