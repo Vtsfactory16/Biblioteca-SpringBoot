@@ -13,7 +13,7 @@ public class PrestamoRequests {
     public static void postPrestamo(Prestamo prestamo) throws Exception {
         String jsonResponse = HTTPRequests.postRequest(prestamo.toJSON(), Constants.BASE_URL + "prestamos");
         JSONObject object = new JSONObject(jsonResponse);
-        if (object.has("id")) {
+        if (object.has("idPrestamo")) {
             prestamo.setIdPrestamo(object.getInt("idPrestamo")); // actualizar la ID del prestamo
         } else  {
             HTTPRequests.throwException(object);

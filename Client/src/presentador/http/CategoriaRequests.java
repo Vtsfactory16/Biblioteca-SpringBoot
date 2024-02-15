@@ -13,7 +13,6 @@ public class CategoriaRequests {
 
     public static String postCategoria(Categoria categoria) throws Exception {
         String jsonResponse = HTTPRequests.postRequest(categoria.toJson(), Constants.BASE_URL+"categorias"); // Petición http
-        System.out.println(jsonResponse);
         JSONObject object = new JSONObject(jsonResponse);
 
         if (object.has("id")) {
@@ -26,7 +25,6 @@ public class CategoriaRequests {
 
     public static String putCategoria(Categoria categoria) throws Exception {
         String jsonResponse = HTTPRequests.putRequest(categoria.toJson(), Constants.BASE_URL+"categorias/" + categoria.getId()); // Petición http
-        System.out.println(jsonResponse);
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
             HTTPRequests.throwException(object);

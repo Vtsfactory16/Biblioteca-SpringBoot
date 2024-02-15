@@ -4,11 +4,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Prestamo {
     private int idPrestamo;
-    private Timestamp fechaPrestamo;
+    private Timestamp fechaPrestamo = Timestamp.valueOf(LocalDateTime.now());
     private Libro libro;
     private Usuario usuario;
 
@@ -60,7 +61,7 @@ public class Prestamo {
     public String toJSON() throws JSONException {
         JSONObject jsonPrestamo = new JSONObject()
                 .put("idPrestamo", idPrestamo)
-                .put("fechaprestamo", fechaPrestamo);
+                .put("fechaPrestamo", fechaPrestamo.getTime());
 
         if (libro != null) {
             // Para insertar, solo necesitamos la id de estos objetos
