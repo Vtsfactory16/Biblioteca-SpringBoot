@@ -13,6 +13,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Timestamp;
 import java.util.List;
 /**
  * Formulario que permite interactuar (insertar, modificar o borrar)
@@ -275,7 +276,10 @@ public class FichaPrestamo extends JInternalFrame implements VistaPrestamo, Acti
         if (usuario!=null)
             eUsuario.setText(usuario.toString());
 
-        eFechaPrestamo.setText(getPrestamo().getFechaPrestamo().toString());
+        Timestamp fechaPrestamo = getPrestamo().getFechaPrestamo();
+        if (fechaPrestamo != null)
+            eFechaPrestamo.setText(fechaPrestamo.toString());
+
         bBorrar.setVisible(getPrestamo().getIdPrestamo()!=0);
         this.setTitle(String.format("Ficha prestamo: [%d]", getPrestamo().getIdPrestamo()));
     }

@@ -12,7 +12,6 @@ import java.util.List;
 public class LibroRequests {
     public static void postLibro(Libro libro) throws Exception {
         String jsonResponse = HTTPRequests.postRequest(libro.toJSON(), Constants.BASE_URL+"libros"); // Petición http
-        System.out.println(jsonResponse);
         JSONObject object = new JSONObject(jsonResponse);
 
         if (object.has("id")) {
@@ -24,7 +23,6 @@ public class LibroRequests {
 
     public static void putLibro(Libro libro) throws Exception {
         String jsonResponse = HTTPRequests.putRequest(libro.toJSON(), Constants.BASE_URL+"libros/" + libro.getId()); // Petición http
-        System.out.println(jsonResponse);
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
             HTTPRequests.throwException(object);
