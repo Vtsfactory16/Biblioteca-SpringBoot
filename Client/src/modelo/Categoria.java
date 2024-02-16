@@ -55,4 +55,9 @@ public class Categoria {
                 .put("categoria", categoria).
                 toString();
     }
+
+    @Override
+    public String toString() {
+        return categoria;
+    }
 }
