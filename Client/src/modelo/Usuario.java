@@ -79,4 +79,10 @@ public class Usuario {
                 .put("apellidos",apellidos)
                 .toString();
     }
+
+    @Override
+    public String toString() {
+        return
+               nombre ;
+    }
 }
