@@ -68,7 +68,7 @@ class HTTPRequestsTest {
 
     @Test
     void postPrestamo() throws Exception {
-        String json = "{\"libro\":{\"id\":5},\"fechaPrestamo\":\"2024-02-15 19:47:50.6930963\",\"idPrestamo\":0,\"usuario\":{\"id\":2}}";
+        String json = "{\"libro\":{\"id\":5},\"fechaPrestamo\":\"2024-02-16T18:58:21.362+01:00\",\"idPrestamo\":0,\"usuario\":{\"id\":2}}";
         String response = HTTPRequests.postRequest(json, "http://localhost:8080/biblioteca/prestamos");
         JSONObject jsonResponse = new JSONObject(response);
         System.out.println(response);

@@ -15,22 +15,22 @@ import java.util.Optional;
 @RequestMapping("/biblioteca/usuarios")
 public class ControllerUsuario {
 
-    IRepositoryUsuario usuarioRepository;
+    IRepositoryUsuario repositoryUsuario;
 
     @Autowired
     public ControllerUsuario(IRepositoryUsuario repositoryUsuario) {
-        this.usuarioRepository = repositoryUsuario;
+        this.repositoryUsuario = repositoryUsuario;
     }
 
 
     @GetMapping
     public List<UsuarioDTO> getAllUsuarios() {
-        return (List<UsuarioDTO>) usuarioRepository.findAll();
+        return (List<UsuarioDTO>) repositoryUsuario.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable(value = "id") Integer idUsuario) {
-        Optional<UsuarioDTO> usuarioOptional = usuarioRepository.findById(idUsuario);
+    public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable(value = "id") int idUsuario) {
+        Optional<UsuarioDTO> usuarioOptional = repositoryUsuario.findById(idUsuario);
         if (usuarioOptional.isPresent()) {
             return ResponseEntity.ok().body(usuarioOptional.get());
         }
@@ -40,14 +40,14 @@ public class ControllerUsuario {
     @PostMapping
     public UsuarioDTO saveUsuario(@Validated @RequestBody UsuarioDTO usuario) {
         usuario.setId(0);
-        return usuarioRepository.save(usuario);
+        return repositoryUsuario.save(usuario);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUsuario(@PathVariable(value = "id") Integer idUsuario) {
-        Optional<UsuarioDTO> usuario = usuarioRepository.findById(idUsuario);
+    public ResponseEntity<?> deleteUsuario(@PathVariable(value = "id") int idUsuario) {
+        Optional<UsuarioDTO> usuario = repositoryUsuario.findById(idUsuario);
         if (usuario.isPresent()) {
-            usuarioRepository.deleteById(idUsuario);
+            repositoryUsuario.deleteById(idUsuario);
             return ResponseEntity.ok().body("{\"status\": \"Usuario Eliminado\"}");
         }
         return ResponseEntity.notFound().build();
@@ -55,13 +55,13 @@ public class ControllerUsuario {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUsuario(@Validated @RequestBody UsuarioDTO newUsuario,
-                                           @PathVariable(value = "id") Integer idUsuario) {
-        Optional<UsuarioDTO> usuarioOptional = usuarioRepository.findById(idUsuario);
+                                           @PathVariable(value = "id") int idUsuario) {
+        Optional<UsuarioDTO> usuarioOptional = repositoryUsuario.findById(idUsuario);
         if (usuarioOptional.isPresent()) {
             UsuarioDTO usuario = usuarioOptional.get();
             usuario.setNombre(newUsuario.getNombre());
             usuario.setApellidos(newUsuario.getApellidos());
-            usuarioRepository.save(usuario);
+            repositoryUsuario.save(usuario);
             return ResponseEntity.ok().body("{\"status\": \"Usuario Actualizado\"}");
         }
         return ResponseEntity.notFound().build();

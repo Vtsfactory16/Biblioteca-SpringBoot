@@ -62,6 +62,6 @@ public class SwgAuxiliar {
      */
     public static void grabarCSV(Table table) throws Exception {
         Path path = Paths.get("ficheros/csv/"+table.toString().toLowerCase()+".csv");
-        CsvWriter.importCsvHibernate(path, table);
+        CsvWriter.importCsv(path, table);
     }
 }

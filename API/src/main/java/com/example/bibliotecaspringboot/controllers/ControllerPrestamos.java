@@ -4,6 +4,7 @@ package com.example.bibliotecaspringboot.controllers;
 import com.example.bibliotecaspringboot.models.entities.PrestamosDTO;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryPrestamos;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,47 +23,46 @@ public class ControllerPrestamos {
     }
 
     @GetMapping
-    public List<PrestamosDTO> buscarPrestamos() {
+    public List<PrestamosDTO> getAllPrestamos() {
         return (List<PrestamosDTO>) repositoryPrestamos.findAll();
     }
 
     @GetMapping("/{id}")
-    public PrestamosDTO buscarPrestamoPorId(int idPrestamo) {
+    public ResponseEntity<PrestamosDTO> getPrestamoById(@PathVariable(value = "id") int idPrestamo) {
         Optional<PrestamosDTO> prestamo = repositoryPrestamos.findById(idPrestamo);
         if (prestamo.isPresent())
-            return prestamo.get();
-        else
-            return null;
+            return ResponseEntity.ok().body(prestamo.get());
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public PrestamosDTO guardarPrestamo(@Validated @RequestBody PrestamosDTO prestamo) {
+    public PrestamosDTO savePrestamo(@Validated @RequestBody PrestamosDTO prestamo) {
         prestamo.setIdPrestamo(0);
         return repositoryPrestamos.save(prestamo);
     }
 
     @DeleteMapping("/{id}")
-    public String borrarPrestamo(int idPrestamo) {
+    public ResponseEntity<?> deletePrestamo(@PathVariable(value = "id") int idPrestamo) {
         Optional<PrestamosDTO> prestamo = repositoryPrestamos.findById(idPrestamo);
         if (prestamo.isPresent()) {
             repositoryPrestamos.deleteById(idPrestamo);
-            return "Borrado";
-        } else {
-            return "No se encontro el prestamo";
+            return ResponseEntity.ok().body("{\"status\": \"Prestamo Eliminado\"}");
         }
+        return ResponseEntity.notFound().build();
     }
+
     @PutMapping("/{id}")
-    public String actualizarPrestamo(@Validated @RequestBody PrestamosDTO nuevoPrestamo, int idPrestamo) {
+    public ResponseEntity<?> updatePrestamo(@Validated @RequestBody PrestamosDTO nuevoPrestamo,
+                                            @PathVariable(value = "id") int idPrestamo) {
         Optional<PrestamosDTO> prestamo = repositoryPrestamos.findById(idPrestamo);
         if (prestamo.isPresent()) {
             prestamo.get().setFechaPrestamo(nuevoPrestamo.getFechaPrestamo());
             prestamo.get().setLibro(nuevoPrestamo.getLibro());
             prestamo.get().setUsuario(nuevoPrestamo.getUsuario());
             repositoryPrestamos.save(prestamo.get());
-            return "Actualizado";
-        } else {
-            return "No se encontro el prestamo";
+            return ResponseEntity.ok().body("{\"status\": \"Prestamo Actualizado\"}");
         }
+        return ResponseEntity.notFound().build();
     }
 
 }

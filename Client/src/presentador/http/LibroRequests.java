@@ -38,7 +38,7 @@ public class LibroRequests {
     }
 
     public static void deleteLibro(Libro usuario) throws Exception {
-        String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "libros" + usuario.getId() );
+        String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "libros/" + usuario.getId() );
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
             HTTPRequests.throwException(object);
