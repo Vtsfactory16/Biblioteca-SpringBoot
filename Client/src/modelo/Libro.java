@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import java.util.Collection;
 import java.util.Objects;
 
-public class Libro {
+public class Libro implements CsvSerializable {
     private int id;
     private String nombre;
     private String autor;
@@ -84,19 +84,31 @@ public class Libro {
     }
 
     public String toJSON() throws JSONException {
-
-        return new JSONObject()
+        JSONObject jsonLibro = new JSONObject()
                 .put("id", id)
                 .put("nombre", nombre)
                 .put("autor",autor)
-                .put("Categoria",categoria)
                 .put("editorial",editorial)
-                .put("prestamos",prestamos)
-                .toString();
+                .put("prestamos",prestamos);
+        if (categoria != null) {
+            JSONObject jsonCategoria = new JSONObject().put("id", categoria.getId());
+            jsonLibro.put("categoria",jsonCategoria);
+        }
+        return jsonLibro.toString();
     }
 
     @Override
     public String toString() {
         return nombre;
+    }
+
+    @Override
+    public String getCsv() {
+        return null;
+    }
+
+    @Override
+    public String getCsvHeader() {
+        return null;
     }
 }

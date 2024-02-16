@@ -1,15 +1,3 @@
-
-###
-POST http://localhost:8080/proyecto_orm/empleado
-Content-Type: application/json
-
-
-
-<> 2024-01-31T091106.400.json
-<> 2024-01-31T091056.400.json
-<> 2024-01-31T091049.400.json
-<> 2024-01-31T090911.400.json
-
 ### GET REQUESTS
 
 GET http://localhost:8080/biblioteca/usuarios
@@ -17,12 +5,15 @@ GET http://localhost:8080/biblioteca/usuarios
 <> 2024-02-06T101745.500.json
 
 ###
-GET http://localhost:8080/prestamos
+GET http://localhost:8080/biblioteca/prestamos
 
 ###
-GET http://localhost:8080/biblioteca/usuarios/1
+GET http://localhost:8080/biblioteca/usuarios/100
 
 <> 2024-02-06T125334.200.json
+
+###
+GET http://localhost:8080/biblioteca/libros
 
 ### POST REQUESTS
 
@@ -89,3 +80,19 @@ Content-Type: application/json
   "nombre": "Vladi",
   "apellidos": "Mort"
 }
+
+### PUT
+PUT http://localhost:8080/biblioteca/libros/37
+Content-Type: application/json
+
+  {
+    "id": 37,
+    "nombre": "Libro",
+    "autor": "con",
+    "editorial": "categoría",
+    "categoria": {
+      "id": 6,
+      "categoria": "Seguridad"
+    },
+    "prestamos": []
+  }

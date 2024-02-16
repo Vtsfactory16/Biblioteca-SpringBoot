@@ -21,30 +21,29 @@ public class ControllerLibro {
 
 
     @GetMapping
-    public List<LibroDTO> buscarLibros() {
+    public List<LibroDTO> getAllLibros() {
         return (List<LibroDTO>) repositoryLibro.findAll();
     }
     @GetMapping("/{id}")
-    public ResponseEntity<LibroDTO> buscarLibroPorId(@PathVariable(value = "id") int id) {
+    public ResponseEntity<LibroDTO> getLibroById(@PathVariable(value = "id") int id) {
         Optional<LibroDTO> libro = repositoryLibro.findById(id);
         if (libro.isPresent())
             return  ResponseEntity.ok().body(libro.get());
-        else return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();
     }
     @DeleteMapping ("/{id}")
-    public ResponseEntity<?> borrarLibro(@PathVariable(value = "id") int id) {
+    public ResponseEntity<?> deleteLibro(@PathVariable(value = "id") int id) {
         Optional<LibroDTO> libro = repositoryLibro.findById(id);
         if (libro.isPresent()) {
             repositoryLibro.deleteById(id);
-            return ResponseEntity.ok().body("Borrado");
-        } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok().body("{\"status\": \"Libro eliminado\"}");
         }
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarEmpleado(@Validated @RequestBody LibroDTO libroActualizado,
-                                                @PathVariable(value = "id") int id) {
+    public ResponseEntity<?> updateLibro(@Validated @RequestBody LibroDTO libroActualizado,
+                                         @PathVariable(value = "id") int id) {
         Optional<LibroDTO> libroOptional = repositoryLibro.findById(id);
         if (libroOptional.isPresent()) {
             LibroDTO libro = libroOptional.get();
@@ -54,15 +53,14 @@ public class ControllerLibro {
             libro.setAutor(libroActualizado.getAutor());
             libro.setEditorial(libroActualizado.getEditorial());
             libro.setPrestamos(libroActualizado.getPrestamos());
-            repositoryLibro.save(libroOptional.get());
-            return ResponseEntity.ok().body("Actualizado");
-        } else {
-            return ResponseEntity.notFound().build();
+            repositoryLibro.save(libro);
+            return ResponseEntity.ok().body("{\"status\": \"Libro actualizado\"}");
         }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public LibroDTO guardarLibro(@Validated @RequestBody LibroDTO libro) {
+    public LibroDTO saveLibro(@Validated @RequestBody LibroDTO libro) {
         libro.setId(0);
         return repositoryLibro.save(libro);
     }

@@ -35,7 +35,7 @@ public class UsuarioRequests {
     }
 
     public static void deleteUser(Usuario usuario) throws Exception {
-        String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "usuarios" + usuario.getId() );
+        String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "usuarios/" + usuario.getId() );
         JSONObject object = new JSONObject(jsonResponse);
         if (object.has("error")) {
             HTTPRequests.throwException(object);

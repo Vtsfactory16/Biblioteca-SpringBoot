@@ -1,7 +1,7 @@
 package modelo.dao.helper;
 
 import helper.Table;
-import modelo.Entidad;
+import modelo.CsvSerializable;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class CsvWriter {
 
-    public static void importCsvHibernate(Path path, Table tabla) throws Exception {
+    public static void importCsv(Path path, Table tabla) throws Exception {
         System.out.println("TODO: Implement");
         /*
         switch (tabla) {
@@ -32,14 +32,14 @@ public class CsvWriter {
     // List<? extends entidad> -> acepta una lista de cualquier tipo que extienda entidad
     // Lista de objetos que extienden entidad (Libro, Usuario, Categoria y Prestamo)
     // He añadido un método getCsv() a la clase Entidad
-    private static void writeCsv(Path path, List<? extends Entidad> entities) throws IOException {
+    private static void writeCsv(Path path, List<? extends CsvSerializable> entities) throws IOException {
         StringBuilder csv = new StringBuilder();
         if (!entities.isEmpty())
             csv.append(entities.get(0).getCsvHeader());
 
-        for (Entidad entidad : entities) {
+        for (CsvSerializable csvSerializable : entities) {
             csv.append(System.lineSeparator());
-            csv.append(entidad.getCsv());
+            csv.append(csvSerializable.getCsv());
         }
 
         Files.createDirectories(path.getParent()); // crea las carpetas si no existen :)
