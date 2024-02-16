@@ -33,3 +33,7 @@ bin/
 *.log
 *.class
 /ficheros/csv
+
+### javaDoc ###
+
+javaDoc/
