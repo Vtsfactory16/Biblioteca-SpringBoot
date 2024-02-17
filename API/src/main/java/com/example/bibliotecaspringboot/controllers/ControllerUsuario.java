@@ -1,13 +1,17 @@
 package com.example.bibliotecaspringboot.controllers;
 
 
+import com.example.bibliotecaspringboot.models.entities.HistoricoDTO;
 import com.example.bibliotecaspringboot.models.entities.UsuarioDTO;
+import com.example.bibliotecaspringboot.models.repositories.IRepositoryHistorico;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,15 +20,22 @@ import java.util.Optional;
 public class ControllerUsuario {
 
     IRepositoryUsuario repositoryUsuario;
+    IRepositoryHistorico repositoryHistorico;
 
     @Autowired
-    public ControllerUsuario(IRepositoryUsuario repositoryUsuario) {
+    public ControllerUsuario(IRepositoryUsuario repositoryUsuario, IRepositoryHistorico repositoryHistorico) {
         this.repositoryUsuario = repositoryUsuario;
+        this.repositoryHistorico = repositoryHistorico;
+    }
+    private void insertHistorico(String mensaje) {
+        String user = "admin";
+        repositoryHistorico.save(new HistoricoDTO(user , Timestamp.valueOf(LocalDateTime.now()), mensaje));
     }
 
 
     @GetMapping
     public List<UsuarioDTO> getAllUsuarios() {
+        insertHistorico("Todos los usuarios seleccionados");
         return (List<UsuarioDTO>) repositoryUsuario.findAll();
     }
 
@@ -32,6 +43,7 @@ public class ControllerUsuario {
     public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable(value = "id") int idUsuario) {
         Optional<UsuarioDTO> usuarioOptional = repositoryUsuario.findById(idUsuario);
         if (usuarioOptional.isPresent()) {
+            insertHistorico("Usuario con ID " + idUsuario + " seleccionado");
             return ResponseEntity.ok().body(usuarioOptional.get());
         }
         return ResponseEntity.notFound().build();
@@ -40,6 +52,7 @@ public class ControllerUsuario {
     @PostMapping
     public UsuarioDTO saveUsuario(@Validated @RequestBody UsuarioDTO usuario) {
         usuario.setId(0);
+        insertHistorico("Usuario con ID " + usuario.getId() + " creado");
         return repositoryUsuario.save(usuario);
     }
 
@@ -48,6 +61,7 @@ public class ControllerUsuario {
         Optional<UsuarioDTO> usuario = repositoryUsuario.findById(idUsuario);
         if (usuario.isPresent()) {
             repositoryUsuario.deleteById(idUsuario);
+            insertHistorico("Usuario con ID " + idUsuario + " eliminado");
             return ResponseEntity.ok().body("{\"status\": \"Usuario Eliminado\"}");
         }
         return ResponseEntity.notFound().build();
@@ -62,6 +76,7 @@ public class ControllerUsuario {
             usuario.setNombre(newUsuario.getNombre());
             usuario.setApellidos(newUsuario.getApellidos());
             repositoryUsuario.save(usuario);
+            insertHistorico("Usuario con ID " + idUsuario + " actualizado");
             return ResponseEntity.ok().body("{\"status\": \"Usuario Actualizado\"}");
         }
         return ResponseEntity.notFound().build();
