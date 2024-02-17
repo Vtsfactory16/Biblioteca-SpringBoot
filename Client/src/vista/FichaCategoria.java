@@ -3,6 +3,7 @@ package vista;
 import presentador.PresentadorCategoria;
 import presentador.VistaCategoria;
 import modelo.*;
+import presentador.VistaCategorias;
 import vista.helper.SwgAuxiliar;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 /**
  * Formulario que permite interactuar (insertar, modificar o borrar)
@@ -18,7 +20,7 @@ import java.awt.event.*;
  * @author AGE
  * @version 2
  */
-public class FichaCategoria extends JInternalFrame implements VistaCategoria, KeyListener, ActionListener, FocusListener, InternalFrameListener {
+public class FichaCategoria extends JInternalFrame implements VistaCategorias, KeyListener, ActionListener, FocusListener, InternalFrameListener {
     private static final int WIDTH = 350;
     private static final int HEIGHT = 120;
     private final Categoria categoria;
@@ -132,11 +134,16 @@ public class FichaCategoria extends JInternalFrame implements VistaCategoria, Ke
             if (categoria.getId()==0) {
                 presentador.inserta();
                 actualizaformulario();
+                presentador.listaAllCategorias();
+                dispose();
             }
             else presentador.modifica();
+            presentador.listaAllCategorias();
             JOptionPane.showMessageDialog(this,"Grabado correctamente!!");
+            dispose();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,e.getMessage(),"Error: ",JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(this,e.getMessage()+"error : "+e.getClass(),"Error: ficha",JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -147,7 +154,9 @@ public class FichaCategoria extends JInternalFrame implements VistaCategoria, Ke
                 JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
             try {
                 presentador.borra();
+                presentador.listaAllCategorias();
                 JOptionPane.showMessageDialog(this,"Categoria borrado con éxito!!");
+
                 dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,e.getMessage(),"Error: ",JOptionPane.ERROR_MESSAGE);
@@ -226,5 +235,15 @@ public class FichaCategoria extends JInternalFrame implements VistaCategoria, Ke
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    @Override
+    public void setCategorias(List<Categoria> listaCategorias) {
+
+    }
+
+    @Override
+    public List<Categoria> getCategorias() {
+        return null;
     }
 }

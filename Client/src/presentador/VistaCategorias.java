@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface VistaCategorias extends VistaCategoria{
     void setCategorias(List<Categoria> listaCategorias);
+    List<Categoria> getCategorias();
+
 }

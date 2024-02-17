@@ -160,6 +160,7 @@ public class ListaPrestamos extends JInternalFrame implements VistaPrestamos, Mo
             else
                 FormMain.getInstance().getDesktopPane().add(Prestamos.fichaPrestamo(prestamo));
 
+
         } catch (Exception e) {
             SwgAuxiliar.msgExcepcion(e);
         }

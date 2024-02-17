@@ -15,14 +15,17 @@ public class PresentadorUsuario {
 
     public void borra() throws Exception {
         usuarioDAO.delete(vistaUsuario.getUsuario().getId());
+        listaAllUsuarios();
     }
 
     public void inserta() throws Exception {
         usuarioDAO.insert(vistaUsuario.getUsuario());
+        listaAllUsuarios();
     }
 
     public void modifica() throws Exception {
         usuarioDAO.update(vistaUsuario.getUsuario());
+        listaAllUsuarios();
     }
 
     public void listaAllUsuarios() throws Exception {

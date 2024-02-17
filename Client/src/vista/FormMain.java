@@ -1,6 +1,7 @@
 package vista;
 
 import helper.Table;
+import modelo.http.CategoriaRequests;
 import vista.componentes.MiBarraDeEstado;
 import vista.helper.*;
 import vista.secret.SecretFrame;
@@ -408,7 +409,32 @@ public class FormMain extends JFrame implements ActionListener, FocusListener, W
         return FormMain.getInstance().getDesktopPane().getComponentCount()*25; // hasta que no se visualiza no se contabiliza
     }
 
-    public void actualizaFichaLibros() {
+    public void actualizaListaUsuarios() throws Exception {
+        List usuarios = (List) new CategoriaRequests().getAll();
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (getDesktopPane().getComponent(i) instanceof  ListaUsuarios)
+                ((ListaUsuarios) getDesktopPane().getComponent(i)).setUsuarios((java.util.List<Usuario>) usuarios);
+    }
+    public void actualizaListaCategorias() throws Exception {
+        List categorias = (List) new CategoriaRequests().getAll();
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (getDesktopPane().getComponent(i) instanceof  ListaCategorias)
+                ((ListaCategorias) getDesktopPane().getComponent(i)).setCategorias((java.util.List<Categoria>) categorias);
+    }
+    public void actualizaListaLibros() throws Exception {
+        List libros = (List) new CategoriaRequests().getAll();
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (getDesktopPane().getComponent(i) instanceof  ListaLibros)
+                ((ListaLibros) getDesktopPane().getComponent(i)).setLibros((java.util.List<Libro>) libros);
+    }
+    public void actualizaListaPrestamos() throws Exception {
+        List prestamos = (List) new CategoriaRequests().getAll();
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (getDesktopPane().getComponent(i) instanceof  ListaPrestamos)
+                ((ListaPrestamos) getDesktopPane().getComponent(i)).setPrestamos((java.util.List<Prestamo>) prestamos);
+    }
+
+    public  void actualizaFichaLibros() {
         for (int i=0;i< getDesktopPane().getComponentCount();i++)
             if (getDesktopPane().getComponent(i) instanceof  FichaLibro)
                 ((FichaLibro) getDesktopPane().getComponent(i)).updateCategorias();
@@ -420,6 +446,7 @@ public class FormMain extends JFrame implements ActionListener, FocusListener, W
                 ((FichaPrestamo) getDesktopPane().getComponent(i)).updateCategorias();
 
     }
+
 
 
     public static void barraEstado(String mensaje){

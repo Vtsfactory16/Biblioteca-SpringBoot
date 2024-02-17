@@ -18,14 +18,17 @@ public class PresentadorPrestamo {
 
     public void borra() throws Exception {
         prestamoDAO.delete(vistaPrestamo.getPrestamo().getIdPrestamo());
+        listaAllPrestamos();
     }
 
     public void inserta() throws Exception {
         prestamoDAO.insert(vistaPrestamo.getPrestamo());
+        listaAllPrestamos();
     }
 
     public void modifica() throws Exception {
         prestamoDAO.update(vistaPrestamo.getPrestamo());
+        listaAllPrestamos();
     }
 
     public void listaAllPrestamos() throws Exception {

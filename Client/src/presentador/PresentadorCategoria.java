@@ -4,30 +4,40 @@ import modelo.dao.CategoriaDAO;
 import modelo.http.CategoriaRequests;
 
 public class PresentadorCategoria {
-    private VistaCategoria vistaCategoria;
+
+    private VistaCategorias vistaCategorias;
     private CategoriaDAO categoriaDAO;
 
-    public PresentadorCategoria(VistaCategoria vistaCategoria, CategoriaDAO categoriaDAO) {
-        this.vistaCategoria = vistaCategoria;
+    public PresentadorCategoria(VistaCategorias vistaCategorias, CategoriaDAO categoriaDAO) {
+        this.vistaCategorias = vistaCategorias;
         this.categoriaDAO = categoriaDAO;
+
     }
 
     public void borra() throws Exception {
-        categoriaDAO.delete(vistaCategoria.getCategoria().getId());
+        categoriaDAO.delete(vistaCategorias.getCategoria().getId());
+        listaAllCategorias();
+
+
     }
 
 
     //Probado y correcto
     public void inserta() throws Exception {
-        categoriaDAO.insert(vistaCategoria.getCategoria());
+        categoriaDAO.insert(vistaCategorias.getCategoria());
+        listaAllCategorias();
+
     }
 
     public void modifica() throws Exception {
-        categoriaDAO.update(vistaCategoria.getCategoria());
+        categoriaDAO.update(vistaCategorias.getCategoria());
+        listaAllCategorias();
+
     }
 
     public void listaAllCategorias() throws Exception {
-        VistaCategorias vistaCategorias = (VistaCategorias) vistaCategoria;
+
+        VistaCategorias vistaCategorias = this.vistaCategorias;
         vistaCategorias.setCategorias(categoriaDAO.getAll());
     }
 }

@@ -19,14 +19,17 @@ public class PresentadorLibro {
 
     public void borra() throws Exception {
         libroDAO.delete(vistaLibro.getLibro().getId());
+        listaAllLibros();
     }
 
     public void inserta() throws Exception {
         libroDAO.insert(vistaLibro.getLibro());
+        listaAllLibros();
     }
 
     public void modifica() throws Exception {
         libroDAO.update(vistaLibro.getLibro());
+        listaAllLibros();
     }
 
     public void listaAllLibros() throws Exception {
