@@ -3,7 +3,6 @@ package com.example.bibliotecaspringboot.models.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 import java.util.Collection;
@@ -23,12 +22,12 @@ public class LibroDTO {
     private String nombre;
     @Basic
     @NotBlank(message="El autor no puede estar vacío")
-    @Size(min = 2, max = 20, message = "El nombre tiene que tener entre 2 y 20 caracteres")
+    @Size(min = 2, max = 20, message = "El autor tiene que tener entre 2 y 20 caracteres")
     @Column(name = "autor", nullable = true, length = -1)
     private String autor;
     @Basic
-    @NotBlank(message="La editorial no puede estar vacío")
-    @Size(min = 2, max = 20, message = "El nombre tiene que tener entre 2 y 20 caracteres")
+    @NotBlank(message="La editorial no puede estar vacía")
+    @Size(min = 2, max = 20, message = "La editorial tiene que tener entre 2 y 20 caracteres")
     @Column(name = "editorial", nullable = true, length = -1)
     private String editorial;
     @ManyToOne

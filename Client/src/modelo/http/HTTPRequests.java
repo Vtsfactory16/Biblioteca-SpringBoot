@@ -1,4 +1,4 @@
-package presentador.http;
+package modelo.http;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,6 +9,7 @@ import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 
 /**
@@ -18,6 +19,7 @@ import java.net.http.HttpResponse;
  */
 public class HTTPRequests {
     static HttpClient client = HttpClient.newHttpClient();
+
 
     public static String postRequest(String json, String url) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -51,7 +53,6 @@ public class HTTPRequests {
                 .uri(URI.create(url))
                 .GET()
                 .build();
-        HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         checkResponse(response);
         // si en este punto no se ha lanzado ninguna excepción, response.body() es un json válido
@@ -109,5 +110,19 @@ public class HTTPRequests {
         } else {
             throw new Exception(String.format("%s\n", linea1));
         }
+    }
+
+    public static void addParam(StringBuilder uri, String key, String value){
+        if (value.isEmpty())
+            return;
+
+        if (uri.indexOf("?") == -1)
+            uri.append("?");
+        else
+            uri.append("&");
+
+        uri.append(URLEncoder.encode(key, StandardCharsets.UTF_8));
+        uri.append("=");
+        uri.append(URLEncoder.encode(value, StandardCharsets.UTF_8));
     }
 }

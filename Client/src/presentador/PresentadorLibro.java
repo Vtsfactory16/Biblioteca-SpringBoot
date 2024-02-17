@@ -1,45 +1,45 @@
 package presentador;
 
 
-import excepciones.CampoVacioExcepcion;
-import modelo.Libro;
-import presentador.http.CategoriaRequests;
-import presentador.http.LibroRequests;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import modelo.dao.CategoriaDAO;
+import modelo.dao.LibroDAO;
+import modelo.http.CategoriaRequests;
+import modelo.http.LibroRequests;
 
 public class PresentadorLibro {
     private VistaLibro vistaLibro;
+    private CategoriaDAO categoriaDAO;
+    private LibroDAO libroDAO;
 
-    public PresentadorLibro(VistaLibro vistaLibro) {
+    public PresentadorLibro(VistaLibro vistaLibro, LibroDAO libroDAO, CategoriaDAO categoriaDAO) {
         this.vistaLibro = vistaLibro;
+        this.libroDAO = libroDAO;
+        this.categoriaDAO =  categoriaDAO;
     }
 
     public void borra() throws Exception {
-        LibroRequests.deleteLibro(vistaLibro.getLibro());
+        libroDAO.delete(vistaLibro.getLibro().getId());
     }
 
     public void inserta() throws Exception {
-        LibroRequests.postLibro(vistaLibro.getLibro());
+        libroDAO.insert(vistaLibro.getLibro());
     }
 
     public void modifica() throws Exception {
-        LibroRequests.putLibro(vistaLibro.getLibro());
+        libroDAO.update(vistaLibro.getLibro());
     }
 
     public void listaAllLibros() throws Exception {
         VistaLibros vistaLibros = (VistaLibros) vistaLibro;
-        vistaLibros.setLibros(LibroRequests.getLibros());
+        vistaLibros.setLibros(libroDAO.getAll());
     }
 
     public void listaAllCategorias() throws Exception {
-        vistaLibro.setCategorias(CategoriaRequests.getCategorias());
+        vistaLibro.setCategorias(categoriaDAO.getAll());
     }
 
     public void leerLibrosOR(int id, String titulo, String autor, String editorial, int categoria) throws Exception {
-        // VistaLibros vistaLibros = (VistaLibros) vistaLibro;
-        // vistaLibros.setLibros(libroDAO.leerLibrosOR(id, titulo, autor, editorial, categoria));
+        VistaLibros vistaLibros = (VistaLibros) vistaLibro;
+        vistaLibros.setLibros(libroDAO.getFiltered(id, titulo, autor, editorial, categoria));
     }
 }

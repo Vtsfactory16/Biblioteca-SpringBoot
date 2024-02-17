@@ -324,7 +324,8 @@ public class FichaPrestamo extends JInternalFrame implements VistaPrestamo, Acti
                         busquedaUsuario.apellidos=eFindUsuario.getText().trim();
                 }
             } else busquedaUsuario.tipo=TipoBusqueda.TODOS;
-            Usuario selected = Usuarios.seleccionaUsuario(null,"Seleccione un usuario:",true,busquedaUsuario).getUsuario();
+            Usuario selected = Usuarios
+                    .seleccionaUsuario(null,"Seleccione un usuario:",true,busquedaUsuario).getUsuario();
             getPrestamo().setUsuario(selected);
             actualizaformulario();
         } catch (NumberFormatException e) {

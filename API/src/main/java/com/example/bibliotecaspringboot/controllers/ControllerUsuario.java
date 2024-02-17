@@ -66,4 +66,13 @@ public class ControllerUsuario {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/filter")
+    public List<UsuarioDTO> getFilteredUsuarios(
+            @RequestParam(value = "id", required = false) Integer id,
+            @RequestParam(value = "nombre", required = false) String nombre,
+            @RequestParam(value = "apellidos", required = false) String apellidos
+    ) {
+        return repositoryUsuario.filter(id, nombre, apellidos);
+    }
 }

@@ -10,10 +10,20 @@ GET http://localhost:8080/biblioteca/prestamos
 ###
 GET http://localhost:8080/biblioteca/usuarios/100
 
-<> 2024-02-06T125334.200.json
+###
+GET http://localhost:8080/biblioteca/usuarios/filter?id=2&nombre=Ge
+
+###
+GET http://localhost:8080/biblioteca/libros/filter?id=39
 
 ###
 GET http://localhost:8080/biblioteca/libros
+
+###
+GET http://localhost:8080/biblioteca/libros/40
+
+###
+GET http://localhost:8080/biblioteca/categorias
 
 ### POST REQUESTS
 

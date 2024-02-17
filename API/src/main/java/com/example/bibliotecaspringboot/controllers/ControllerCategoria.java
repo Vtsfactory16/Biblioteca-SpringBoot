@@ -2,12 +2,16 @@ package com.example.bibliotecaspringboot.controllers;
 
 
 import com.example.bibliotecaspringboot.models.entities.CategoriaDTO;
+import com.example.bibliotecaspringboot.models.entities.HistoricoDTO;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryCategoria;
+import com.example.bibliotecaspringboot.models.repositories.IRepositoryHistorico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,15 +20,22 @@ import java.util.Optional;
 public class ControllerCategoria {
 
     IRepositoryCategoria repositoryCategoria;
+    IRepositoryHistorico repositoryHistorico;
 
     @Autowired
-    public ControllerCategoria(IRepositoryCategoria repositoryCategoria) {
+    public ControllerCategoria(IRepositoryCategoria repositoryCategoria, IRepositoryHistorico repositoryHistorico) {
         this.repositoryCategoria = repositoryCategoria;
+        this.repositoryHistorico = repositoryHistorico;
     }
 
+    private void insertHistorico(String mensaje) {
+        String user = "admin";
+        repositoryHistorico.save(new HistoricoDTO(user , Timestamp.valueOf(LocalDateTime.now()), mensaje));
+    }
 
     @GetMapping
     public List<CategoriaDTO> getAllCategorias() {
+        insertHistorico("Todas las categorías seleccionadas");
         return (List<CategoriaDTO>) repositoryCategoria.findAll();
     }
 

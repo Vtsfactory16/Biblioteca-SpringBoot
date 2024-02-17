@@ -2,10 +2,10 @@ package modelo.helper;
 
 import helper.Table;
 import modelo.CsvSerializable;
-import presentador.http.CategoriaRequests;
-import presentador.http.LibroRequests;
-import presentador.http.PrestamoRequests;
-import presentador.http.UsuarioRequests;
+import modelo.http.CategoriaRequests;
+import modelo.http.LibroRequests;
+import modelo.http.PrestamoRequests;
+import modelo.http.UsuarioRequests;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,10 +18,10 @@ public class CsvWriter {
 
     public static void importCsv(Path path, Table tabla) throws Exception {
         switch (tabla) {
-            case LIBROS -> writeCsv(path, LibroRequests.getLibros());
-            case USUARIOS -> writeCsv(path, UsuarioRequests.getUsers());
-            case PRESTAMOS -> writeCsv(path, PrestamoRequests.getPrestamos());
-            case CATEGORIAS -> writeCsv(path, CategoriaRequests.getCategorias());
+            case LIBROS -> writeCsv(path, new LibroRequests().getAll());
+            case USUARIOS -> writeCsv(path, new UsuarioRequests().getAll());
+            case PRESTAMOS -> writeCsv(path, new PrestamoRequests().getAll());
+            case CATEGORIAS -> writeCsv(path, new CategoriaRequests().getAll());
         }
     }
 

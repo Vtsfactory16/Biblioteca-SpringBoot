@@ -65,4 +65,18 @@ public class ControllerLibro {
         return repositoryLibro.save(libro);
     }
 
+    /**
+     * Para realizar la búsqueda con OR necesaria en FichaPrestamo
+     */
+    @GetMapping("/filter")
+    public List<LibroDTO> getFilteredLibros(
+            @RequestParam(value = "id", required = false) Integer id,
+            @RequestParam(value = "nombre", required = false) String nombre,
+            @RequestParam(value = "autor", required = false) String autor,
+            @RequestParam(value = "editorial", required = false) String editorial,
+            @RequestParam(value = "idcategoria", required = false) Integer idCategoria
+    ) {
+        return repositoryLibro.filter(id,nombre,autor,editorial,idCategoria);
+    }
+
 }

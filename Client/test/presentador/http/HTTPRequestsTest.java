@@ -1,13 +1,16 @@
 package presentador.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import modelo.Categoria;
 import modelo.Libro;
 import modelo.Prestamo;
 import modelo.Usuario;
-import org.json.JSONException;
+import modelo.dao.LibroDAO;
+import modelo.dao.UsuarioDAO;
+import modelo.http.*;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-import vista.helper.Libros;
+import singleton.Configuracion;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,19 +22,19 @@ class HTTPRequestsTest {
     @Test
     void postUsuario() throws Exception {
         Usuario usuario = new Usuario(0, "Sippy", "Buch");
-        UsuarioRequests.postUser(usuario);
+        new UsuarioRequests().insert(usuario);
         assertNotEquals(0,usuario.getId());
     }
 
     @Test
     void postUnvalidUsuario() throws Exception {
         Usuario usuario = new Usuario(0, "Sippy", "B");
-        assertThrows(Exception.class, () -> UsuarioRequests.postUser(usuario));
+        assertThrows(Exception.class, () -> new UsuarioRequests().insert(usuario));
     }
 
     @Test
     void getLibros() throws Exception {
-        System.out.println(LibroRequests.getLibros());
+        System.out.println(new LibroRequests().getAll());
     }
 
     @Test
@@ -66,7 +69,7 @@ class HTTPRequestsTest {
 
     @Test
     void getPrestamosTest() throws Exception {
-        for (Prestamo p : PrestamoRequests.getPrestamos()) {
+        for (Prestamo p : new PrestamoRequests().getAll()) {
             System.out.println(p.getIdPrestamo());
             System.out.println(p.getUsuario());
             System.out.println(p.getLibro());
@@ -91,6 +94,34 @@ class HTTPRequestsTest {
         JSONObject jsonResponse = new JSONObject(response);
         System.out.println(jsonResponse.get("fechaPrestamo"));
         assertNotEquals("null", jsonResponse.get("fechaPrestamo"));
+    }
+
+    @Test
+    void getCategoriaByIdTest() throws Exception {
+        Categoria categoria = new CategoriaRequests().getById(1);
+        System.out.println(categoria.toCsv());
+        System.out.println(categoria.getLibros());
+        assertNotNull(categoria);
+    }
+
+    @Test
+    void configTest() throws Exception {
+        String url = Configuracion.getInstance().getUrl();
+        assertEquals( "http://localhost:8080/biblioteca/", url );
+    }
+
+    @Test
+    void getUsuariosORTest() throws Exception {
+        UsuarioDAO requests = new UsuarioRequests();
+        List<Usuario> users = requests.getFiltered(0,"","");
+        System.out.println(users);
+    }
+
+    @Test
+    void getLibrosORTest() throws Exception {
+        LibroDAO requests = new LibroRequests();
+        List<Libro> users = requests.getFiltered(0,"","", "", 0);
+        System.out.println(users);
     }
 }
 
