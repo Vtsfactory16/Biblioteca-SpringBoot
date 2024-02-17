@@ -10,10 +10,10 @@ import java.util.List;
 
 @Repository
 public interface IRepositoryUsuario extends CrudRepository<UsuarioDTO, Integer> {
-    @Query("select u from UsuarioDTO u " +
-            "where u.id = :id OR u.nombre like %:nombre% OR u.apellidos like %:apellidos%")
+    @Query("SELECT u FROM UsuarioDTO u " +
+            "WHERE u.id = :id OR u.nombre LIKE %:nombre% OR u.apellidos LIKE %:apellidos%" )
     List<UsuarioDTO> filter(
-            @Param("id") int id,
+            @Param("id") Integer id,
             @Param("nombre") String nombre,
             @Param("apellidos") String apellidos
     );

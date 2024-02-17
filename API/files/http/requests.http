@@ -13,6 +13,8 @@ GET http://localhost:8080/biblioteca/usuarios/100
 ###
 GET http://localhost:8080/biblioteca/usuarios/filter?id=2&nombre=Ge
 
+###
+GET http://localhost:8080/biblioteca/libros/filter?id=39
 
 ###
 GET http://localhost:8080/biblioteca/libros

@@ -1,8 +1,10 @@
 package modelo.http;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import modelo.Libro;
 import modelo.Prestamo;
+import modelo.Usuario;
 import modelo.dao.LibroDAO;
 import org.json.JSONObject;
 
@@ -35,15 +37,26 @@ public class LibroRequests implements LibroDAO {
     @Override
     public List<Libro> getAll() throws Exception {
         String json = HTTPRequests.getRequest(Constants.BASE_URL + "libros");
-        ObjectMapper objectMapper = new ObjectMapper(); // Pasar de json a objetos
-        Libro[] libros = objectMapper.readValue(json, Libro[].class);
-        return Arrays.asList(libros);
+        return jsonToLibroList(json);
     }
 
     @Override
-    public List<Libro> getFiltered(int id, String titulo, String autor, String editorial, int categoria) throws Exception {
-        List<Libro> libros = getAll();
-        return libros;
+    public List<Libro> getFiltered(int id, String nombre, String autor, String editorial, int idCategoria) throws Exception {
+        StringBuilder uri = new StringBuilder(Constants.BASE_URL + "libros/filter");
+        HTTPRequests.addParam(uri, "id", String.valueOf(id));
+        HTTPRequests.addParam(uri, "nombre", nombre);
+        HTTPRequests.addParam(uri, "autor", autor);
+        HTTPRequests.addParam(uri, "editorial", editorial);
+        HTTPRequests.addParam(uri, "idcategoria", String.valueOf(idCategoria));
+
+        String json = HTTPRequests.getRequest(uri.toString());
+        return jsonToLibroList(json);
+    }
+
+    private List<Libro> jsonToLibroList(String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Libro[] libros = objectMapper.readValue(json, Libro[].class);
+        return Arrays.asList(libros);
     }
 
     @Override

@@ -42,14 +42,12 @@ public class UsuarioRequests implements UsuarioDAO {
         HTTPRequests.addParam(uri, "id", String.valueOf(id));
         HTTPRequests.addParam(uri, "nombre", nombre);
         HTTPRequests.addParam(uri, "apellidos", apellidos);
-        System.out.println(uri);
 
         String json = HTTPRequests.getRequest(uri.toString());
-        System.out.println(json);
         return jsonToUserList(json);
     }
 
-    private List<Usuario> jsonToUserList(String json) throws JsonProcessingException {
+    private static List<Usuario> jsonToUserList(String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Usuario[] usuarios = objectMapper.readValue(json, Usuario[].class);
         return Arrays.asList(usuarios);

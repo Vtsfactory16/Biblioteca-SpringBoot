@@ -69,7 +69,7 @@ public class ControllerUsuario {
 
     @GetMapping("/filter")
     public List<UsuarioDTO> getFilteredUsuarios(
-            @RequestParam(value = "id", required = false) int id,
+            @RequestParam(value = "id", required = false) Integer id,
             @RequestParam(value = "nombre", required = false) String nombre,
             @RequestParam(value = "apellidos", required = false) String apellidos
     ) {

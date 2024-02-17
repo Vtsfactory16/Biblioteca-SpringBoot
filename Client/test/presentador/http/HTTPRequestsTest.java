@@ -5,6 +5,8 @@ import modelo.Categoria;
 import modelo.Libro;
 import modelo.Prestamo;
 import modelo.Usuario;
+import modelo.dao.LibroDAO;
+import modelo.dao.UsuarioDAO;
 import modelo.http.*;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -110,8 +112,15 @@ class HTTPRequestsTest {
 
     @Test
     void getUsuariosORTest() throws Exception {
-        UsuarioRequests requests = new UsuarioRequests();
-        List<Usuario> users = requests.getFiltered(2,"","");
+        UsuarioDAO requests = new UsuarioRequests();
+        List<Usuario> users = requests.getFiltered(0,"","");
+        System.out.println(users);
+    }
+
+    @Test
+    void getLibrosORTest() throws Exception {
+        LibroDAO requests = new LibroRequests();
+        List<Libro> users = requests.getFiltered(0,"","", "", 0);
         System.out.println(users);
     }
 }

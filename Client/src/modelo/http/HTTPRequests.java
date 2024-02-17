@@ -20,19 +20,6 @@ import java.nio.charset.StandardCharsets;
 public class HTTPRequests {
     static HttpClient client = HttpClient.newHttpClient();
 
-    public static void addParam(StringBuilder uri, String key, String value){
-        if (value.isEmpty())
-            return;
-
-        if (uri.indexOf("?") == -1)
-            uri.append("?");
-        else
-            uri.append("&");
-
-        uri.append(URLEncoder.encode(key, StandardCharsets.UTF_8));
-        uri.append("=");
-        uri.append(URLEncoder.encode(value, StandardCharsets.UTF_8));
-    }
 
     public static String postRequest(String json, String url) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -123,5 +110,19 @@ public class HTTPRequests {
         } else {
             throw new Exception(String.format("%s\n", linea1));
         }
+    }
+
+    public static void addParam(StringBuilder uri, String key, String value){
+        if (value.isEmpty())
+            return;
+
+        if (uri.indexOf("?") == -1)
+            uri.append("?");
+        else
+            uri.append("&");
+
+        uri.append(URLEncoder.encode(key, StandardCharsets.UTF_8));
+        uri.append("=");
+        uri.append(URLEncoder.encode(value, StandardCharsets.UTF_8));
     }
 }

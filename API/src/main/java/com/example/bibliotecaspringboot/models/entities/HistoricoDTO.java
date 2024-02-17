@@ -22,6 +22,13 @@ public class HistoricoDTO {
     @Column(name = "info", nullable = true, length = -1)
     private String info;
 
+    public HistoricoDTO() {}
+    public HistoricoDTO(String user, Timestamp fecha, String info) {
+        this.user = user;
+        this.fecha = fecha;
+        this.info = info;
+    }
+
     public int getIdHistorico() {
         return idHistorico;
     }
