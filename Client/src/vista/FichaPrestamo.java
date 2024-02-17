@@ -43,12 +43,8 @@ public class FichaPrestamo extends JInternalFrame implements VistaPrestamo, Acti
         pCheckLibro.add(ckAutor);
         pCheckLibro.add(ckEditorial);
     }
-    public void updateCategorias() {
-        try {
-            presentador.listaAllCategorias();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void updateCategorias() throws Exception {
+        presentador.listaAllCategorias();
     }
     private JComboBox cbCategoria=new JComboBox();{
         cbCategoria.addFocusListener(this);

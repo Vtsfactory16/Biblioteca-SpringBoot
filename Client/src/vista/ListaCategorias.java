@@ -239,5 +239,7 @@ public class ListaCategorias extends JInternalFrame implements VistaCategorias,M
         }
     }
 
-
+    public void updateCategorias() throws Exception {
+        presentador.listaAllCategorias();
+    }
 }

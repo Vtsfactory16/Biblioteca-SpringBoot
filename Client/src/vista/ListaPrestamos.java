@@ -243,6 +243,10 @@ public class ListaPrestamos extends JInternalFrame implements VistaPrestamos, Mo
         else if (e.getSource().equals(miBorra))
             borrar(getPrestamo());
     }
+
+    public void updatePrestamos() throws Exception {
+        presentador.listaAllPrestamos();
+    }
 }
 
 

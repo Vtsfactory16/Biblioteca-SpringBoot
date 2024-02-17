@@ -161,7 +161,10 @@ public class ListaLibros extends JInternalFrame implements VistaLibros, MouseLis
                 }
             }
         }
+    }
 
+    public void updateLibros() throws Exception {
+        presentador.listaAllLibros();
     }
 
     @Override
