@@ -205,4 +205,7 @@ public class ListaUsuarios extends JInternalFrame implements VistaUsuarios, Mous
             borrar(getUsuario());
     }
 
+    public void updateUsuarios() throws Exception {
+        presentador.listaAllUsuarios();
+    }
 }

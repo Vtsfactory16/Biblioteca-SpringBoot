@@ -141,12 +141,8 @@ public class FichaLibro extends JInternalFrame implements VistaLibro, ActionList
         presentador.listaAllCategorias();
     }
 
-    public void updateCategorias() {
-        try {
-            presentador.listaAllCategorias();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public void updateCategorias() throws Exception {
+        presentador.listaAllCategorias();
     }
     @Override
     public void setCategorias(List<Categoria> categorias) {

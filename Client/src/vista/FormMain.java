@@ -1,6 +1,7 @@
 package vista;
 
 import helper.Table;
+import modelo.http.CategoriaRequests;
 import vista.componentes.MiBarraDeEstado;
 import vista.helper.*;
 import vista.secret.SecretFrame;
@@ -8,6 +9,7 @@ import modelo.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 import java.awt.event.*;
 
 /**
@@ -408,17 +410,61 @@ public class FormMain extends JFrame implements ActionListener, FocusListener, W
         return FormMain.getInstance().getDesktopPane().getComponentCount()*25; // hasta que no se visualiza no se contabiliza
     }
 
-    public void actualizaFichaLibros() {
+    /**
+     * Este método es llamado por los PRESENTADORES cuando
+     * realizan un cambio.
+     * @param event La tabla que ha cambiado
+     */
+    public void updateForms(Table event) throws Exception {
+        switch (event) {
+            case USUARIOS -> {
+                actualizaListaUsuarios();
+                actualizaListaPrestamos();
+            }
+            case CATEGORIAS-> {
+                actualizaListaCategorias();
+                actualizaListaLibros();
+                actualizaFichaLibros();
+                actualizaFichaPrestamos();
+            }
+            case LIBROS-> {
+                actualizaListaLibros();
+                actualizaListaPrestamos();
+            }
+            case PRESTAMOS-> actualizaListaPrestamos();
+        }
+    }
+    private void actualizaListaUsuarios() throws Exception {
         for (int i=0;i< getDesktopPane().getComponentCount();i++)
-            if (getDesktopPane().getComponent(i) instanceof  FichaLibro)
+            if (getDesktopPane().getComponent(i) instanceof ListaUsuarios)
+                ((ListaUsuarios) getDesktopPane().getComponent(i)).updateUsuarios();
+    }
+    private void actualizaListaCategorias() throws Exception {
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (getDesktopPane().getComponent(i) instanceof ListaCategorias)
+                ((ListaCategorias) getDesktopPane().getComponent(i)).updateCategorias();
+    }
+    private void actualizaListaLibros() throws Exception {
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (FormMain.getInstance().getDesktopPane().getComponent(i) instanceof ListaLibros)
+                ((ListaLibros) getDesktopPane().getComponent(i)).updateLibros();
+    }
+    private void actualizaListaPrestamos() throws Exception {
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (getDesktopPane().getComponent(i) instanceof ListaPrestamos)
+                ((ListaPrestamos) getDesktopPane().getComponent(i)).updatePrestamos();
+    }
+
+    private void actualizaFichaLibros() throws Exception {
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (getDesktopPane().getComponent(i) instanceof FichaLibro)
                 ((FichaLibro) getDesktopPane().getComponent(i)).updateCategorias();
 
     }
-    public void actualizaFichaPrestamos() {
+    private void actualizaFichaPrestamos() throws Exception {
         for (int i=0;i< getDesktopPane().getComponentCount();i++)
-            if (getDesktopPane().getComponent(i) instanceof  FichaPrestamo)
+            if (getDesktopPane().getComponent(i) instanceof FichaPrestamo)
                 ((FichaPrestamo) getDesktopPane().getComponent(i)).updateCategorias();
-
     }
 
 
