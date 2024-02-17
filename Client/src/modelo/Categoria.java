@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.Collection;
 import java.util.Objects;
 
-public class Categoria {
+public class Categoria implements CsvSerializable{
     private int id;
     private String categoria;
     private Collection<Libro> libros;
@@ -59,5 +59,15 @@ public class Categoria {
     @Override
     public String toString() {
         return categoria;
+    }
+
+    @Override
+    public String toCsv() {
+        return String.format("%d, %s", id, categoria);
+    }
+
+    @Override
+    public String getCsvHeader() {
+        return "id, categoria";
     }
 }

@@ -12,19 +12,11 @@ public class UsuarioRequests {
     public static void postUser(Usuario usuario) throws Exception {
         String jsonResponse = HTTPRequests.postRequest(usuario.toJSON(), Constants.BASE_URL+"usuarios"); // Petición http
         JSONObject object = new JSONObject(jsonResponse);
-        if (object.has("id")) {
-            usuario.setId(object.getInt("id")); // Actualizar la ID del usuario
-        } else  {
-            HTTPRequests.throwException(object);
-        }
+        usuario.setId(object.getInt("id")); // Actualizar la ID del usuario
     }
 
     public static void putUser(Usuario usuario) throws Exception {
-        String jsonResponse = HTTPRequests.putRequest(usuario.toJSON(), Constants.BASE_URL+"usuarios/" + usuario.getId()); // Petición http
-        JSONObject object = new JSONObject(jsonResponse);
-        if (object.has("error")) {
-            HTTPRequests.throwException(object);
-        }
+        HTTPRequests.putRequest(usuario.toJSON(), Constants.BASE_URL+"usuarios/" + usuario.getId()); // Petición http
     }
 
     public static List<Usuario> getUsers()  throws Exception{
@@ -36,9 +28,5 @@ public class UsuarioRequests {
 
     public static void deleteUser(Usuario usuario) throws Exception {
         String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "usuarios/" + usuario.getId() );
-        JSONObject object = new JSONObject(jsonResponse);
-        if (object.has("error")) {
-            HTTPRequests.throwException(object);
-        }
     }
 }

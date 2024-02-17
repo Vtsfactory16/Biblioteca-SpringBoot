@@ -5,9 +5,10 @@ import org.json.JSONObject;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class Prestamo {
+public class Prestamo implements CsvSerializable {
     private int idPrestamo;
     private Timestamp fechaPrestamo = Timestamp.valueOf(LocalDateTime.now());
     private Libro libro;
@@ -73,5 +74,28 @@ public class Prestamo {
             jsonPrestamo.put("usuario", jsonUsuario);
         }
         return jsonPrestamo.toString();
+    }
+
+    // Métodos para generar csv
+
+    private int getUsuarioId() {
+        if (usuario == null) return -1;
+        return usuario.getId();
+    }
+
+    private int getLibroId() {
+        if (libro == null) return -1;
+        return libro.getId();
+    }
+
+    @Override
+    public String toCsv() {
+        String fecha = fechaPrestamo != null ? fechaPrestamo.toLocalDateTime().format(DateTimeFormatter.ISO_DATE_TIME) : "null";
+        return String.format("%d, %d, %d, %s", idPrestamo, getLibroId(), getUsuarioId(), fecha);
+    }
+
+    @Override
+    public String getCsvHeader() {
+        return "idPrestamo, idLibro, idUsuario, fechaPrestamo";
     }
 }
