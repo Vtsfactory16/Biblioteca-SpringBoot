@@ -88,8 +88,7 @@ public class Libro implements CsvSerializable {
                 .put("id", id)
                 .put("nombre", nombre)
                 .put("autor",autor)
-                .put("editorial",editorial)
-                .put("prestamos",prestamos);
+                .put("editorial",editorial);
         if (categoria != null) {
             JSONObject jsonCategoria = new JSONObject().put("id", categoria.getId());
             jsonLibro.put("categoria",jsonCategoria);
