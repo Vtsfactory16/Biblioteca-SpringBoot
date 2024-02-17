@@ -1,34 +1,40 @@
 package presentador;
 
-import presentador.http.CategoriaRequests;
-import presentador.http.PrestamoRequests;
+import modelo.dao.CategoriaDAO;
+import modelo.dao.PrestamoDAO;
+import modelo.http.CategoriaRequests;
+import modelo.http.PrestamoRequests;
 
 public class PresentadorPrestamo {
     private VistaPrestamo vistaPrestamo;
+    private CategoriaDAO categoriaDAO;
+    private PrestamoDAO prestamoDAO;
 
-    public PresentadorPrestamo(VistaPrestamo vistaPrestamo) {
+    public PresentadorPrestamo(VistaPrestamo vistaPrestamo, PrestamoDAO prestamoDAO, CategoriaDAO categoriaDAO) {
         this.vistaPrestamo = vistaPrestamo;
+        this.prestamoDAO = prestamoDAO;
+        this.categoriaDAO = categoriaDAO;
     }
 
     public void borra() throws Exception {
-        PrestamoRequests.deletePrestamo(vistaPrestamo.getPrestamo());
+        prestamoDAO.delete(vistaPrestamo.getPrestamo().getIdPrestamo());
     }
 
     public void inserta() throws Exception {
-        PrestamoRequests.postPrestamo(vistaPrestamo.getPrestamo());
+        prestamoDAO.insert(vistaPrestamo.getPrestamo());
     }
 
     public void modifica() throws Exception {
-        PrestamoRequests.putPrestamo(vistaPrestamo.getPrestamo());
+        prestamoDAO.update(vistaPrestamo.getPrestamo());
     }
 
     public void listaAllPrestamos() throws Exception {
         VistaPrestamos vistaPrestamos = (VistaPrestamos) vistaPrestamo;
-        vistaPrestamos.setPrestamos(PrestamoRequests.getPrestamos());
+        vistaPrestamos.setPrestamos(prestamoDAO.getAll());
     }
 
     public void listaAllCategorias() throws Exception {
-        vistaPrestamo.setCategorias(CategoriaRequests.getCategorias());
+        vistaPrestamo.setCategorias(categoriaDAO.getAll());
     }
 
 }

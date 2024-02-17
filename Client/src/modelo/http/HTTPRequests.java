@@ -1,4 +1,4 @@
-package presentador.http;
+package modelo.http;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +51,6 @@ public class HTTPRequests {
                 .uri(URI.create(url))
                 .GET()
                 .build();
-        HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         checkResponse(response);
         // si en este punto no se ha lanzado ninguna excepción, response.body() es un json válido

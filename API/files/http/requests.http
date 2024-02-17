@@ -15,6 +15,12 @@ GET http://localhost:8080/biblioteca/usuarios/100
 ###
 GET http://localhost:8080/biblioteca/libros
 
+###
+GET http://localhost:8080/biblioteca/libros/40
+
+###
+GET http://localhost:8080/biblioteca/categorias
+
 ### POST REQUESTS
 
 POST http://localhost:8080/biblioteca/usuarios
