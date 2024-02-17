@@ -27,9 +27,9 @@ public class LoginPass extends JDialog implements ActionListener, WindowListener
     }
     private JPanel pNorte;{
         pNorte=new JPanel(new GridLayout(2,0));
-        TitledBorder titledBorderDriverUrl = BorderFactory.createTitledBorder("Driver y URL:");
+        TitledBorder titledBorderDriverUrl = BorderFactory.createTitledBorder("URL:");
         pNorte.setBorder(titledBorderDriverUrl);
-        JLabel driver=new JLabel(myConf.getDriver());
+        JLabel driver=new JLabel("Biblioteca REST API");
         JLabel url=new JLabel(myConf.getUrl());
         pNorte.add(driver);
         pNorte.add(url);
@@ -131,31 +131,19 @@ public class LoginPass extends JDialog implements ActionListener, WindowListener
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(bAceptar)) {
             if (conectar()) {
-                this.dispose();
                 FormMain.getInstance().actualizaFormulario(true);
+                this.dispose();
             }
             else JOptionPane.showMessageDialog(this,"Revise la conexión a la BD, el usuario o la contraseña","Atención: ",JOptionPane.INFORMATION_MESSAGE);
         } else if (e.getSource().equals(bSalir))
             salir();
     }
 
-   /* private boolean conectar() {
-        boolean bSalir=false;
-        myConf.setUser(eUser.getText());
-        try{
-            myConf.setPassword(String.valueOf(ePass.getPassword()));
-            ConexionMySQL.getInstance().getConexion();
-            bSalir=true;
-        } catch (Exception e) {
-            SwgAuxiliar.msgExcepcion(e);
-        }
-        return bSalir;
-    }*/
     private boolean conectar() {
         try {
             myConf.setUser(eUser.getText());
             myConf.setPassword(String.valueOf(ePass.getPassword()));
-            return true;
+            return true; // TODO Implementar login
             // return HibernateUtilJPA.getEntityManagerFactory() != null;
         } catch (Exception e) {
             SwgAuxiliar.msgExcepcion(e);
@@ -226,4 +214,5 @@ public class LoginPass extends JDialog implements ActionListener, WindowListener
     public void focusLost(FocusEvent e) {
 
     }
+
 }

@@ -74,14 +74,14 @@ public class HTTPRequests {
      * de esta forma evitamos tener que manejar errores en las clases
      * LibroRequests, PrestamoRequests, CategoriaRequests y UsuarioRequests
      */
-    private static void checkResponse(HttpResponse<String> postResponse) throws Exception {
-        if (postResponse.statusCode() != 200) {
+    private static void checkResponse(HttpResponse<String> response) throws Exception {
+        if (response.statusCode() != 200) {
             // si ha devuelto información en el body en forma de json, lo incluimos en el error
-            if (isValidJson(postResponse.body())) {
-                throwException(new JSONObject(postResponse.body()));
+            if (isValidJson(response.body())) {
+                throwException(new JSONObject(response.body()));
             }
             // si no, simplemente incluimos el código de respuesta
-            throw new IOException("HTTP request failed with response status code " + postResponse.statusCode() + ".");
+            throw new IOException("HTTP request failed with response status code " + response.statusCode() + ".");
         }
     }
 
