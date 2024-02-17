@@ -271,8 +271,7 @@ public class FormMain extends JFrame implements ActionListener, FocusListener, W
     public static FormMain getInstance(){
         if (main==null) {
             main = new FormMain();
-            main.actualizaFormulario(true); // TODO: Implement log in
-            // main.loginPassword();
+            main.loginPassword();
         }
         return main;
     }

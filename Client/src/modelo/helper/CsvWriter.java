@@ -1,4 +1,4 @@
-package modelo.dao.helper;
+package modelo.helper;
 
 import helper.Table;
 import modelo.CsvSerializable;

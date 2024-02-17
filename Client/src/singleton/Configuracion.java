@@ -19,9 +19,6 @@ public class Configuracion {
     public static final String FILE_CONF="ficheros/biblioteca.config";
     private static final String claveSecreta="asdf234fsdva%l9asdnklfa@f4f_adfafaAAaad;";
     private static Configuracion conf=null;
-    private static final String DRIVER_DEFAULT="com.mysql.cj.jdbc.Driver";
-
-    private String driver;
     private String url;
     private String user;
     private String password;
@@ -29,30 +26,12 @@ public class Configuracion {
     private Configuracion() throws Exception {
         Properties p = new Properties();
         p.load(new FileReader(FILE_CONF));
-        driver = p.getProperty("driver");
         url = p.getProperty("url");
         user = p.getProperty("user");
         password = p.getProperty("password");
 
     }
 
-    /**
-     * para obtener el driver que necesita el contralador JDBC para la conexión
-     * @return la clase del driver JDBC
-     */
-    public String getDriver() {
-        if (driver.equals(""))
-            return DRIVER_DEFAULT;
-        else return driver;
-    }
-
-    /**
-     * actualiza el driver en la configuración
-     * @param driver la clase del driver JDBC
-     */
-    public void setDriver(String driver) {
-        this.driver = driver;
-    }
     /**
      * para obtener la configuracíón del servidor/puerto/esquema de la BD
      * @return cadena de conexión a la bd
@@ -98,7 +77,7 @@ public class Configuracion {
         this.password = EncriptacionDesencriptacion.encriptar(password,claveSecreta);
     }
     /**
-     * implentación del patrón de diseño Singleton para esta clase
+     * implementación del patrón de diseño Singleton para esta clase
      * @return instancia única del objeto de esta clase para la aplicación actual
      * @throws IOException errores de entrada y salida cuando trabajamos con el fichero de configuración de la aplicación
      */
@@ -115,7 +94,6 @@ public class Configuracion {
             super.run();
             if (conf != null) {
                 Properties p = new Properties();
-                p.setProperty("driver", conf.driver);
                 p.setProperty("url", conf.url);
                 p.setProperty("user", conf.user);
                 try {

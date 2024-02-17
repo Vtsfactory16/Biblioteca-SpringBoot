@@ -1,7 +1,7 @@
 package vista.helper;
 
 import helper.Table;
-import modelo.dao.helper.CsvWriter;
+import modelo.helper.CsvWriter;
 import vista.FormMain;
 import javax.swing.*;
 import java.awt.*;

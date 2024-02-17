@@ -1,8 +1,6 @@
 package presentador;
 
-import modelo.Categoria;
 import presentador.http.CategoriaRequests;
-import presentador.http.HTTPRequests;
 
 public class PresentadorCategoria {
     private VistaCategoria vistaCategoria;
@@ -11,7 +9,6 @@ public class PresentadorCategoria {
         this.vistaCategoria = vistaCategoria;
     }
 
-    private final String ENDPOINT = "categorias";
     public void borra() throws Exception {
         CategoriaRequests.deleteCategoria(vistaCategoria.getCategoria());
     }
