@@ -103,12 +103,18 @@ public class Libro implements CsvSerializable {
     }
 
     @Override
-    public String getCsv() {
-        return null;
+    public String toCsv() {
+        return String.format("%d, %s, %s, %s, %d",id, nombre, autor, editorial, getIdCategoria());
+    }
+
+    private int getIdCategoria() {
+        if (categoria == null)
+            return -1;
+        return categoria.getId();
     }
 
     @Override
     public String getCsvHeader() {
-        return null;
+        return "id, nombre, autor, editorial, categoria";
     }
 }

@@ -1,13 +1,12 @@
 package modelo;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Collection;
 import java.util.Objects;
 
-public class Usuario {
+public class Usuario implements CsvSerializable{
     private int id;
     private String nombre;
     private String apellidos;
@@ -82,7 +81,16 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return
-               nombre ;
+        return nombre;
+    }
+
+    @Override
+    public String toCsv() {
+        return String.format("%d, %s, %s", id, nombre, apellidos);
+    }
+
+    @Override
+    public String getCsvHeader() {
+        return "id, nombre, apellidos";
     }
 }
