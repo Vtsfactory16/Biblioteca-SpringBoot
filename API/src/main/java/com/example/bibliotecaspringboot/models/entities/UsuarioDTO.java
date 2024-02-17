@@ -16,12 +16,12 @@ public class UsuarioDTO {
     @Column(name = "id", nullable = false)
     private int id;
     @Basic
-    @NotBlank(message="La editorial no puede estar vacío")
+    @NotBlank(message="El campo \"nombre\" no puede estar vacío")
     @Size(min = 2, max = 20, message = "El nombre tiene que tener entre 2 y 20 caracteres")
     @Column(name = "nombre", nullable = true, length = -1)
     private String nombre;
     @Basic
-    @NotBlank(message="La editorial no puede estar vacío")
+    @NotBlank(message="El campo \"apellidos\" no puede estar vacío")
     @Size(min = 2, max = 20, message = "Los apellidos tiene que tener entre 2 y 20 caracteres")
     @Column(name = "apellidos", nullable = true, length = -1)
     private String apellidos;

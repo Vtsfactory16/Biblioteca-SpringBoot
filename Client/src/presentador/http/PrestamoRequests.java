@@ -13,19 +13,11 @@ public class PrestamoRequests {
     public static void postPrestamo(Prestamo prestamo) throws Exception {
         String jsonResponse = HTTPRequests.postRequest(prestamo.toJSON(), Constants.BASE_URL + "prestamos");
         JSONObject object = new JSONObject(jsonResponse);
-        if (object.has("idPrestamo")) {
-            prestamo.setIdPrestamo(object.getInt("idPrestamo")); // actualizar la ID del prestamo
-        } else  {
-            HTTPRequests.throwException(object);
-        }
+        prestamo.setIdPrestamo(object.getInt("idPrestamo")); // actualizar la ID del prestamo
     }
 
     public static void putPrestamo(Prestamo prestamo) throws Exception {
-        String jsonResponse = HTTPRequests.putRequest(prestamo.toJSON(), Constants.BASE_URL+"prestamos/" + prestamo.getIdPrestamo());
-        JSONObject object = new JSONObject(jsonResponse);
-        if (object.has("error")) {
-            HTTPRequests.throwException(object);
-        }
+        HTTPRequests.putRequest(prestamo.toJSON(), Constants.BASE_URL+"prestamos/" + prestamo.getIdPrestamo());
     }
 
     public static List<Prestamo> getPrestamos() throws Exception{
@@ -38,8 +30,5 @@ public class PrestamoRequests {
     public static void deletePrestamo(Prestamo prestamo) throws Exception {
         String jsonResponse = HTTPRequests.deleteRequest(Constants.BASE_URL + "prestamos/" + prestamo.getIdPrestamo());
         JSONObject object = new JSONObject(jsonResponse);
-        if (object.has("error")) {
-            HTTPRequests.throwException(object);
-        }
     }
 }

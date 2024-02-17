@@ -17,8 +17,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HTTPRequestsTest {
     @Test
-    void postAndPutRequest() {
-        Usuario usuario = new Usuario(1, "Sippy", "Buch");
+    void postUsuario() throws Exception {
+        Usuario usuario = new Usuario(0, "Sippy", "Buch");
+        UsuarioRequests.postUser(usuario);
+        assertNotEquals(0,usuario.getId());
+    }
+
+    @Test
+    void postUnvalidUsuario() throws Exception {
+        Usuario usuario = new Usuario(0, "Sippy", "B");
+        assertThrows(Exception.class, () -> UsuarioRequests.postUser(usuario));
     }
 
     @Test
@@ -83,7 +91,6 @@ class HTTPRequestsTest {
         JSONObject jsonResponse = new JSONObject(response);
         System.out.println(jsonResponse.get("fechaPrestamo"));
         assertNotEquals("null", jsonResponse.get("fechaPrestamo"));
-
     }
 }
 
