@@ -1,5 +1,6 @@
 package modelo.http;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import modelo.Usuario;
 import modelo.dao.UsuarioDAO;
@@ -7,6 +8,8 @@ import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
+
+import modelo.http.HTTPRequests;
 
 public class UsuarioRequests implements UsuarioDAO {
     @Override
@@ -26,21 +29,37 @@ public class UsuarioRequests implements UsuarioDAO {
         HTTPRequests.deleteRequest(Constants.BASE_URL + "usuarios/" + id );
     }
 
-    @Override
-    public Usuario getById(int id) throws Exception {
-        return null;
-    }
 
     @Override
     public List<Usuario> getAll() throws Exception{
         String json = HTTPRequests.getRequest(Constants.BASE_URL + "usuarios");
+        return jsonToUserList(json);
+    }
+
+    @Override
+    public List<Usuario> getFiltered(int id, String nombre, String apellidos) throws Exception {
+        StringBuilder uri = new StringBuilder(Constants.BASE_URL + "usuarios/filter");
+        HTTPRequests.addParam(uri, "id", String.valueOf(id));
+        HTTPRequests.addParam(uri, "nombre", nombre);
+        HTTPRequests.addParam(uri, "apellidos", apellidos);
+        System.out.println(uri);
+
+        String json = HTTPRequests.getRequest(uri.toString());
+        System.out.println(json);
+        return jsonToUserList(json);
+    }
+
+    private List<Usuario> jsonToUserList(String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Usuario[] usuarios = objectMapper.readValue(json, Usuario[].class);
         return Arrays.asList(usuarios);
     }
 
+
     @Override
-    public List<Usuario> getFiltered(int id, String nombre, String apellidos) throws Exception {
-        return null;
+    public Usuario getById(int id) throws Exception {
+        String json = HTTPRequests.getRequest(Constants.BASE_URL + "usuarios/" + id);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, Usuario.class);
     }
 }

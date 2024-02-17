@@ -1,6 +1,7 @@
 package modelo.http;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import modelo.Categoria;
 import modelo.Prestamo;
 import modelo.dao.PrestamoDAO;
 import org.json.JSONObject;
@@ -18,11 +19,16 @@ public class PrestamoRequests implements PrestamoDAO {
 
     @Override
     public void update(Prestamo prestamo) throws Exception {
-        HTTPRequests.putRequest(prestamo.toJSON(), Constants.BASE_URL+"prestamos/" + prestamo.getIdPrestamo());
+        HTTPRequests.putRequest(prestamo.toJSON(), Constants.BASE_URL + "prestamos/" + prestamo.getIdPrestamo());
     }
 
     @Override
-    public List<Prestamo> getAll() throws Exception{
+    public void delete(int id) throws Exception {
+        HTTPRequests.deleteRequest(Constants.BASE_URL + "prestamos/" + id);
+    }
+
+    @Override
+    public List<Prestamo> getAll() throws Exception {
         String jsonResponse = HTTPRequests.getRequest(Constants.BASE_URL + "prestamos");
         ObjectMapper objectMapper = new ObjectMapper();
         Prestamo[] prestamos = objectMapper.readValue(jsonResponse, Prestamo[].class);
@@ -31,11 +37,9 @@ public class PrestamoRequests implements PrestamoDAO {
 
     @Override
     public Prestamo getById(int id) throws Exception {
-        return null;
+        String json = HTTPRequests.getRequest(Constants.BASE_URL + "prestamos/" + id);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(json, Prestamo.class);
     }
 
-    @Override
-    public void delete(int id) throws Exception {
-        HTTPRequests.deleteRequest(Constants.BASE_URL + "prestamos/" + id);
-    }
 }

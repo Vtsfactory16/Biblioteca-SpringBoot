@@ -9,6 +9,7 @@ import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 
 /**
@@ -18,6 +19,20 @@ import java.net.http.HttpResponse;
  */
 public class HTTPRequests {
     static HttpClient client = HttpClient.newHttpClient();
+
+    public static void addParam(StringBuilder uri, String key, String value){
+        if (value.isEmpty())
+            return;
+
+        if (uri.indexOf("?") == -1)
+            uri.append("?");
+        else
+            uri.append("&");
+
+        uri.append(URLEncoder.encode(key, StandardCharsets.UTF_8));
+        uri.append("=");
+        uri.append(URLEncoder.encode(value, StandardCharsets.UTF_8));
+    }
 
     public static String postRequest(String json, String url) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()

@@ -107,5 +107,12 @@ class HTTPRequestsTest {
         String url = Configuracion.getInstance().getUrl();
         assertEquals( "http://localhost:8080/biblioteca/", url );
     }
+
+    @Test
+    void getUsuariosORTest() throws Exception {
+        UsuarioRequests requests = new UsuarioRequests();
+        List<Usuario> users = requests.getFiltered(2,"","");
+        System.out.println(users);
+    }
 }
 
