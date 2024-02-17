@@ -1,8 +1,10 @@
 package com.example.bibliotecaspringboot.models.entities;
 
+import com.example.bibliotecaspringboot.models.repositories.IRepositoryHistorico;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +23,8 @@ public class HistoricoDTO {
     @Basic
     @Column(name = "info", nullable = true, length = -1)
     private String info;
+
+
 
     public HistoricoDTO() {}
     public HistoricoDTO(String user, Timestamp fecha, String info) {
@@ -73,4 +77,6 @@ public class HistoricoDTO {
     public int hashCode() {
         return Objects.hash(idHistorico, user, fecha, info);
     }
+
+
 }
