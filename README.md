@@ -25,6 +25,10 @@ una aplicación **cliente** desarrollada en Java Swing.
   <img src="https://img.shields.io/badge/spring-%236DB33F.svg?&style=flat&logo=spring&logoColor=white" />
 </div>
 
+# Conexión a la base de datos:
+<img src="Client/imagenes/Conexion.png" alt="Descripción de la imagen" width="50%">
+
+
 # Aplicación Spring Boot (API REST) ⚙️
 
 La API REST proporciona endpoints para realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en las siguientes entidades:
