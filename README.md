@@ -25,39 +25,52 @@ una aplicación **cliente** desarrollada en Java Swing.
   <img src="https://img.shields.io/badge/spring-%236DB33F.svg?&style=flat&logo=spring&logoColor=white" />
 </div>
 
-### Aplicación Spring Boot (API REST) ⚙️
+# Aplicación Spring Boot (API REST) ⚙️
 
 La API REST proporciona endpoints para realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en las siguientes entidades:
 
-- **Controladores:**
-  - Usuario
-  - Categoría
-  - Histórico
-  - Libro
-  - Préstamos
+## Controladores 📚
+Los controladores gestionan las operaciones relacionadas con su respectiva entidad, como crear un nuevo usuario, obtener información sobre libros, etc. Los controladores incluyen:
+- Usuario
+- Categoría
+- Bibliotecario
+- Libro
+- Préstamos
 
-Cada controlador gestiona las operaciones relacionadas con su respectiva entidad, como crear un nuevo usuario, obtener información sobre libros, etc.
+## Endpoints 📍
+Para comprender cómo hemos utilizado los diversos puntos finales para el enrutamiento de las distintas operaciones de una entidad, tomaremos como ejemplo las anotaciones en la clase ControllerCategoria:
 
-### Aplicación Cliente (Java Swing) ☕️
+### Anotaciones de Spring 🌱
+- `@RestController`: Indica a Spring que esta clase funcionará como un controlador. Los métodos de esta clase devolverán objetos que se serializarán directamente en el cuerpo de la respuesta HTTP.
+- `@RequestMapping("/biblioteca/categorias")`: Asigna la clase ControllerCategoria a una ruta URI que finaliza con "/biblioteca/categorias".
+- `@GetMapping`: Asigna solicitudes HTTP GET a los métodos de búsqueda (SELECT) dentro del controlador. Para la entidad de categoría, tenemos:
+  - `@GetMapping`: Para el método getAllCategorias(), que devuelve todas las categorías de la base de datos utilizando findAll().
+  - `@GetMapping("/{id}")`: Para el método getCategoriaById(id), que devuelve la categoría de la base de datos utilizando findById(id).
+- `@PostMapping`: Asigna solicitudes HTTP POST al método de guardar (INSERT) dentro del controlador, en este caso, saveCategoria(categoria).
+- `@DeleteMapping("/{id}")`: Asigna solicitudes HTTP DELETE al método de borrar dentro del controlador, en este caso, deleteCategoria(id).
+- `@PutMapping("/{id}")`: Asigna solicitudes HTTP PUT al método de actualizar (UPDATE) dentro del controlador, en este caso, updateCategoria(nuevaCategoria, id).
+- `@Autowired`: Realiza la inyección automática de dependencias en los campos o constructores. Esto evita la necesidad de crear manualmente instancias de objetos, ya que Spring se encarga de ello.
+- `@PathVariable`: Vincula variables de la URI de una solicitud HTTP a los parámetros de un método del controlador, permitiendo que los valores de las partes variables de la URL se pasen como argumentos al método.
+- `@Validated`: Activa la validación de los parámetros de un método del controlador, asegurando que los objetos pasados como argumentos sean validados según las restricciones definidas en las anotaciones de validación de Bean Validation (por ejemplo, @NotNull, @Size, @Email, etc.).
+- `@RequestBody`: Indica que un parámetro del controlador debe estar vinculado al cuerpo de la solicitud HTTP entrante, convirtiéndolo en el tipo de objeto correspondiente.
 
+# Aplicación Cliente (Java Swing) ☕️
 
 La aplicación cliente proporciona una interfaz de usuario amigable para interactuar con la API REST. Incluye:
 
-#### HTTPRequests
+## HTTPRequests 🌐
+Módulos para realizar peticiones HTTP a la API en cada entidad:
+- Request Categoría
+- Request Libro
+- Request Préstamos
+- Request Usuario
 
-- Módulos para realizar peticiones HTTP a la API en cada entidad:
-  - Request Categoría
-  - Request Libro
-  - Request Préstamos
-  - Request Usuario
-
-#### CRUD Cliente
-
-- Clases para realizar operaciones CRUD en cada entidad:
-  - Presentador Usuario
-  - Presentador Libro
-  - Presentador Categoría
-  - Presentador Préstamos
+## CRUD Cliente 🖥️
+Clases para realizar operaciones CRUD en cada entidad:
+- Presentador Usuario
+- Presentador Libro
+- Presentador Categoría
+- Presentador Préstamos
 
 Estos presentadores actúan como la capa intermedia entre la interfaz de usuario y las solicitudes HTTP, gestionando la lógica de negocio y la presentación de datos.
 
