@@ -25,27 +25,83 @@ una aplicación **cliente** desarrollada en Java Swing.
   <img src="https://img.shields.io/badge/spring-%236DB33F.svg?&style=flat&logo=spring&logoColor=white" />
 </div>
 
-### Aplicación Spring Boot
+### Aplicación Spring Boot (API REST) ⚙️
 
-  # Creación de controladores:
-    - Controlador Usuario
-    - Controlador Categoría
-    - Controlador Histórico
-    - Controlador Libro
-    - Controlador Prestamos
-    
+La API REST proporciona endpoints para realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en las siguientes entidades:
 
-### Aplicación Cliente
+- **Controladores:**
+  - Usuario
+  - Categoría
+  - Histórico
+  - Libro
+  - Préstamos
 
-  # Creación de HTTPRequests:
-    - Request Categoría
-    - Request Libro
-    - Request Prestamos
-    - Request Usuario
+Cada controlador gestiona las operaciones relacionadas con su respectiva entidad, como crear un nuevo usuario, obtener información sobre libros, etc.
 
- # Creación de CRUD Cliente:
-   - Presentador Usuario
-   - Presentador Libro
-   - Presentador Categoría
-   - Presentador Prestamos
+### Aplicación Cliente (Java Swing) ☕️
+
+
+La aplicación cliente proporciona una interfaz de usuario amigable para interactuar con la API REST. Incluye:
+
+#### HTTPRequests
+
+- Módulos para realizar peticiones HTTP a la API en cada entidad:
+  - Request Categoría
+  - Request Libro
+  - Request Préstamos
+  - Request Usuario
+
+#### CRUD Cliente
+
+- Clases para realizar operaciones CRUD en cada entidad:
+  - Presentador Usuario
+  - Presentador Libro
+  - Presentador Categoría
+  - Presentador Préstamos
+
+Estos presentadores actúan como la capa intermedia entre la interfaz de usuario y las solicitudes HTTP, gestionando la lógica de negocio y la presentación de datos.
+
+
+### Esquema Conceptual 🌍
+
+
+     +---------------------+       HTTP Requests        +------------------------+
+     |        Cliente      |  <---------------------->  |    API REST (Spring    |
+     |    (Java Swing)     |                            |         Boot)          |
+     +---------------------+                            +------------------------+
+              |                                                      |
+              |               Interfaz de Usuario                     |
+              +------------------------------------------------------+
+                                           |
+                                           | Peticiones HTTP
+                                           |
+                                           V
+                                  +----------------------------+
+                                  |   Controladores de la API   |
+                                  |    (Usuario, Categoría,    |
+                                  |      Libro, Préstamos)     |
+                                  +----------------------------+
+                                           |
+                                           | Acceso a la base de datos
+                                           |
+                                           V
+                                  +----------------------------+
+                                  |     Base de Datos MySQL    |
+                                  +----------------------------+
+
+  
+
+
+
+
+## 🚀 Instrucciones de Uso
+
+Para ejecutar la aplicación, sigue estos pasos:
+
+1. Clona este repositorio en tu máquina local.
+2. Importa el proyecto en tu IDE de Java preferido.
+3. Configura la conexión a la base de datos MySQL en el archivo `application.properties`.
+4. Ejecuta la aplicación Spring Boot para iniciar el servidor.
+5. Ejecuta la aplicación cliente para interactuar con la API.
+
 

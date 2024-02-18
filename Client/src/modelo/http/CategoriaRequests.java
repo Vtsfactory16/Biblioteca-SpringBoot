@@ -21,7 +21,6 @@ public class CategoriaRequests implements CategoriaDAO {
     @Override
     public void update(Categoria categoria) throws Exception {
         HTTPRequests.putRequest(categoria.toJson(), Constants.BASE_URL+"categorias/" + categoria.getId()); // Petición http
-
     }
 
     @Override

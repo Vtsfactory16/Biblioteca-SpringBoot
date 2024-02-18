@@ -8,4 +8,6 @@ public interface VistaCategoria {
     void setPresentador(PresentadorCategoria presentador) throws Exception;
     Categoria getCategoria();
 
+
+
 }

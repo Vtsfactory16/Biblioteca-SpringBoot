@@ -3,6 +3,8 @@ package com.example.bibliotecaspringboot.models.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -56,4 +58,6 @@ public class CategoriaDTO {
     public void setLibros(Collection<LibroDTO> libros) {
         this.libros = libros;
     }
+
+
 }

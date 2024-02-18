@@ -1,7 +1,9 @@
 package presentador;
 
+import helper.Table;
 import modelo.dao.UsuarioDAO;
 import modelo.http.UsuarioRequests;
+import vista.FormMain;
 
 public class PresentadorUsuario {
     private VistaUsuario vistaUsuario;
@@ -15,17 +17,17 @@ public class PresentadorUsuario {
 
     public void borra() throws Exception {
         usuarioDAO.delete(vistaUsuario.getUsuario().getId());
-        listaAllUsuarios();
+        notifyForms();
     }
 
     public void inserta() throws Exception {
         usuarioDAO.insert(vistaUsuario.getUsuario());
-        listaAllUsuarios();
+        notifyForms();
     }
 
     public void modifica() throws Exception {
         usuarioDAO.update(vistaUsuario.getUsuario());
-        listaAllUsuarios();
+        notifyForms();
     }
 
     public void listaAllUsuarios() throws Exception {
@@ -36,6 +38,10 @@ public class PresentadorUsuario {
     public void leerUsuariosOR(int id,String nombre,String apellidos) throws Exception {
         VistaUsuarios vistaUsuarios = (VistaUsuarios) vistaUsuario;
         vistaUsuarios.setUsuarios(usuarioDAO.getFiltered(id,nombre,apellidos));
+    }
+
+    private void notifyForms() throws Exception {
+        FormMain.getInstance().updateForms(Table.USUARIOS);
     }
 
 }

@@ -21,9 +21,7 @@ public class LibroRequests implements LibroDAO {
 
     @Override
     public void update(Libro libro) throws Exception {
-        String jsonResponse = HTTPRequests.putRequest(libro.toJSON(), Constants.BASE_URL + "libros/" + libro.getId()); // Petición http
-        JSONObject object = new JSONObject(jsonResponse);
-        HTTPRequests.throwException(object);
+        HTTPRequests.putRequest(libro.toJSON(), Constants.BASE_URL + "libros/" + libro.getId()); // Petición http
     }
 
     @Override

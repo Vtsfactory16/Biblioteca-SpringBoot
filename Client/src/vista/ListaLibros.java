@@ -156,13 +156,15 @@ public class ListaLibros extends JInternalFrame implements VistaLibros, MouseLis
                     JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
                 try {
                     presentador.borra();
-
                 } catch (Exception e) {
                     SwgAuxiliar.msgExcepcion(e);
                 }
             }
         }
+    }
 
+    public void updateLibros() throws Exception {
+        presentador.listaAllLibros();
     }
 
     @Override

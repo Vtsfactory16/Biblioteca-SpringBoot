@@ -42,14 +42,17 @@ public class ControllerCategoria {
     @GetMapping("/{id}")
     public ResponseEntity<CategoriaDTO> getCategoriaById(@PathVariable(value = "id") int idCategoria) {
         Optional<CategoriaDTO> categoria = repositoryCategoria.findById(idCategoria);
-        if (categoria.isPresent())
+        if (categoria.isPresent()) {
+            insertHistorico("Categoría con ID " + idCategoria + " seleccionada");
             return ResponseEntity.ok().body(categoria.get());
-        return null;
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
     public CategoriaDTO saveCategoria(@Validated @RequestBody CategoriaDTO categoria) {
         categoria.setId(0);
+        insertHistorico("Categoría " + categoria.getCategoria() + " creada");
         return repositoryCategoria.save(categoria);
     }
 
@@ -58,6 +61,7 @@ public class ControllerCategoria {
         Optional<CategoriaDTO> categoria = repositoryCategoria.findById(idCategoria);
         if (categoria.isPresent()) {
             repositoryCategoria.deleteById(idCategoria);
+            insertHistorico("Categoría " + categoria.get().getCategoria() + " eliminada");
             return ResponseEntity.ok().body("{\"status\": \"Categoria Eliminada\"}");
         }
         return ResponseEntity.notFound().build();
@@ -71,6 +75,7 @@ public class ControllerCategoria {
         if (categoria.isPresent()) {
             categoria.get().setCategoria(nuevaCategoria.getCategoria());
             repositoryCategoria.save(categoria.get());
+            insertHistorico("Categoría " + categoria.get().getCategoria() + " actualizada");
             return ResponseEntity.ok().body("{\"status\": \"Categoria Actualizada\"}");
         }
         return ResponseEntity.notFound().build();

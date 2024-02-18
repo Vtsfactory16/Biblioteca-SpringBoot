@@ -1,10 +1,12 @@
 package presentador;
 
 
+import helper.Table;
 import modelo.dao.CategoriaDAO;
 import modelo.dao.LibroDAO;
 import modelo.http.CategoriaRequests;
 import modelo.http.LibroRequests;
+import vista.FormMain;
 
 public class PresentadorLibro {
     private VistaLibro vistaLibro;
@@ -19,17 +21,17 @@ public class PresentadorLibro {
 
     public void borra() throws Exception {
         libroDAO.delete(vistaLibro.getLibro().getId());
-        listaAllLibros();
+        notifyForms();
     }
 
     public void inserta() throws Exception {
         libroDAO.insert(vistaLibro.getLibro());
-        listaAllLibros();
+        notifyForms();
     }
 
     public void modifica() throws Exception {
         libroDAO.update(vistaLibro.getLibro());
-        listaAllLibros();
+        notifyForms();
     }
 
     public void listaAllLibros() throws Exception {
@@ -44,5 +46,15 @@ public class PresentadorLibro {
     public void leerLibrosOR(int id, String titulo, String autor, String editorial, int categoria) throws Exception {
         VistaLibros vistaLibros = (VistaLibros) vistaLibro;
         vistaLibros.setLibros(libroDAO.getFiltered(id, titulo, autor, editorial, categoria));
+    }
+
+    /**
+     * El presentador de libro informa a FormMain de que se han realizado cambios
+     * en la tabla libro.
+     * FormMain recorrerrá todas las listas de libros abiertas y las actualizará
+     * @throws Exception
+     */
+    private void notifyForms() throws Exception {
+        FormMain.getInstance().updateForms(Table.LIBROS);
     }
 }

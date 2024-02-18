@@ -9,6 +9,7 @@ import modelo.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 import java.awt.event.*;
 
 /**
@@ -409,44 +410,62 @@ public class FormMain extends JFrame implements ActionListener, FocusListener, W
         return FormMain.getInstance().getDesktopPane().getComponentCount()*25; // hasta que no se visualiza no se contabiliza
     }
 
-    public void actualizaListaUsuarios() throws Exception {
-        List usuarios = (List) new CategoriaRequests().getAll();
-        for (int i=0;i< getDesktopPane().getComponentCount();i++)
-            if (getDesktopPane().getComponent(i) instanceof  ListaUsuarios)
-                ((ListaUsuarios) getDesktopPane().getComponent(i)).setUsuarios((java.util.List<Usuario>) usuarios);
+    /**
+     * Este método es llamado por los PRESENTADORES cuando
+     * realizan un cambio.
+     * @param event La tabla que ha cambiado
+     */
+    public void updateForms(Table event) throws Exception {
+        switch (event) {
+            case USUARIOS -> {
+                actualizaListaUsuarios();
+                actualizaListaPrestamos();
+            }
+            case CATEGORIAS-> {
+                actualizaListaCategorias();
+                actualizaListaLibros();
+                actualizaFichaLibros();
+                actualizaFichaPrestamos();
+            }
+            case LIBROS-> {
+                actualizaListaLibros();
+                actualizaListaPrestamos();
+            }
+            case PRESTAMOS-> actualizaListaPrestamos();
+        }
     }
-    public void actualizaListaCategorias() throws Exception {
-        List categorias = (List) new CategoriaRequests().getAll();
+    private void actualizaListaUsuarios() throws Exception {
         for (int i=0;i< getDesktopPane().getComponentCount();i++)
-            if (getDesktopPane().getComponent(i) instanceof  ListaCategorias)
-                ((ListaCategorias) getDesktopPane().getComponent(i)).setCategorias((java.util.List<Categoria>) categorias);
+            if (getDesktopPane().getComponent(i) instanceof ListaUsuarios)
+                ((ListaUsuarios) getDesktopPane().getComponent(i)).updateUsuarios();
     }
-    public void actualizaListaLibros() throws Exception {
-        List libros = (List) new CategoriaRequests().getAll();
+    private void actualizaListaCategorias() throws Exception {
         for (int i=0;i< getDesktopPane().getComponentCount();i++)
-            if (getDesktopPane().getComponent(i) instanceof  ListaLibros)
-                ((ListaLibros) getDesktopPane().getComponent(i)).setLibros((java.util.List<Libro>) libros);
+            if (getDesktopPane().getComponent(i) instanceof ListaCategorias)
+                ((ListaCategorias) getDesktopPane().getComponent(i)).updateCategorias();
     }
-    public void actualizaListaPrestamos() throws Exception {
-        List prestamos = (List) new CategoriaRequests().getAll();
+    private void actualizaListaLibros() throws Exception {
         for (int i=0;i< getDesktopPane().getComponentCount();i++)
-            if (getDesktopPane().getComponent(i) instanceof  ListaPrestamos)
-                ((ListaPrestamos) getDesktopPane().getComponent(i)).setPrestamos((java.util.List<Prestamo>) prestamos);
+            if (FormMain.getInstance().getDesktopPane().getComponent(i) instanceof ListaLibros)
+                ((ListaLibros) getDesktopPane().getComponent(i)).updateLibros();
+    }
+    private void actualizaListaPrestamos() throws Exception {
+        for (int i=0;i< getDesktopPane().getComponentCount();i++)
+            if (getDesktopPane().getComponent(i) instanceof ListaPrestamos)
+                ((ListaPrestamos) getDesktopPane().getComponent(i)).updatePrestamos();
     }
 
-    public  void actualizaFichaLibros() {
+    private void actualizaFichaLibros() throws Exception {
         for (int i=0;i< getDesktopPane().getComponentCount();i++)
-            if (getDesktopPane().getComponent(i) instanceof  FichaLibro)
+            if (getDesktopPane().getComponent(i) instanceof FichaLibro)
                 ((FichaLibro) getDesktopPane().getComponent(i)).updateCategorias();
 
     }
-    public void actualizaFichaPrestamos() {
+    private void actualizaFichaPrestamos() throws Exception {
         for (int i=0;i< getDesktopPane().getComponentCount();i++)
-            if (getDesktopPane().getComponent(i) instanceof  FichaPrestamo)
+            if (getDesktopPane().getComponent(i) instanceof FichaPrestamo)
                 ((FichaPrestamo) getDesktopPane().getComponent(i)).updateCategorias();
-
     }
-
 
 
     public static void barraEstado(String mensaje){

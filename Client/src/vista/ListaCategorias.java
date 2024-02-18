@@ -66,11 +66,6 @@ public class ListaCategorias extends JInternalFrame implements VistaCategorias,M
     }
 
     @Override
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    @Override
     public Categoria getCategoria() {
         if (jTable.getSelectedRow()==-1){
             return null;
@@ -143,10 +138,6 @@ public class ListaCategorias extends JInternalFrame implements VistaCategorias,M
             if (categoria != null) {
                 FormMain.getInstance().getDesktopPane().add(Categorias.fichaCategoria(categoria));
                 FormMain.getInstance().getDesktopPane().selectFrame(false);
-
-
-
-
             }
         } catch (Exception e) {
             SwgAuxiliar.msgExcepcion(e);
@@ -162,13 +153,9 @@ public class ListaCategorias extends JInternalFrame implements VistaCategorias,M
                     JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
                 try {
                     presentador.borra();
-
-
-
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this,e.getMessage(),"Error: ",JOptionPane.ERROR_MESSAGE);
                 }
-                //actualizar la tabla
             }
         }
 
@@ -252,5 +239,7 @@ public class ListaCategorias extends JInternalFrame implements VistaCategorias,M
         }
     }
 
-
+    public void updateCategorias() throws Exception {
+        presentador.listaAllCategorias();
+    }
 }
