@@ -25,7 +25,7 @@ una aplicación **cliente** desarrollada en Java Swing.
   <img src="https://img.shields.io/badge/spring-%236DB33F.svg?&style=flat&logo=spring&logoColor=white" />
 </div>
 
-### Aplicación Spring Boot (API REST)
+### Aplicación Spring Boot (API REST) ⚙️
 
 La API REST proporciona endpoints para realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en las siguientes entidades:
 
@@ -38,7 +38,8 @@ La API REST proporciona endpoints para realizar operaciones CRUD (Crear, Leer, A
 
 Cada controlador gestiona las operaciones relacionadas con su respectiva entidad, como crear un nuevo usuario, obtener información sobre libros, etc.
 
-### Aplicación Cliente (Java Swing)
+### Aplicación Cliente (Java Swing) ☕️
+
 
 La aplicación cliente proporciona una interfaz de usuario amigable para interactuar con la API REST. Incluye:
 
@@ -59,6 +60,39 @@ La aplicación cliente proporciona una interfaz de usuario amigable para interac
   - Presentador Préstamos
 
 Estos presentadores actúan como la capa intermedia entre la interfaz de usuario y las solicitudes HTTP, gestionando la lógica de negocio y la presentación de datos.
+
+
+### Esquema Conceptual 🌍
+
+
+     +---------------------+       HTTP Requests        +------------------------+
+     |        Cliente      |  <---------------------->  |    API REST (Spring    |
+     |    (Java Swing)     |                            |         Boot)          |
+     +---------------------+                            +------------------------+
+              |                                                      |
+              |               Interfaz de Usuario                     |
+              +------------------------------------------------------+
+                                           |
+                                           | Peticiones HTTP
+                                           |
+                                           V
+                                  +----------------------------+
+                                  |   Controladores de la API   |
+                                  |    (Usuario, Categoría,    |
+                                  |      Libro, Préstamos)     |
+                                  +----------------------------+
+                                           |
+                                           | Acceso a la base de datos
+                                           |
+                                           V
+                                  +----------------------------+
+                                  |     Base de Datos MySQL    |
+                                  +----------------------------+
+
+  
+
+
+
 
 ## 🚀 Instrucciones de Uso
 

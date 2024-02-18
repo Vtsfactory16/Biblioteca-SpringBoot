@@ -2,6 +2,33 @@
 
 Nuestras hazañas y desgracias :feelsgood:
 
+### 2024-02-17
+
+- Inserciones en **histórico** desde el resto de controladores
+- **Actualización** de ventanas cuando se produce un cambio (anteriormente implementado con observer)
+- Búsqueda de **libros** y **usuarios** desde la ventana `FichaPrestamo`
+- Mejora en la **gestión de errores** de las peticiones HTTP
+    - Lanzamos una excepción si el código de respuesta es distinto a 200
+- Volver a implementar exportaciones a **csv**
+- Volver a implementar el patrón **DAO**
+
+### 2024-02-16
+
+Pequeños arreglos:
+
+- Refactorizar **controladores**
+- Arreglar error en el método `toJson()` de `Libro`
+- Eliminar archivos **JavaDoc** antiguos
+
+### 2024-02-15
+
+- Eliminar el **controlador de Historico**
+- Inserción de prestamos
+
+### 2024-02-14
+
+- Uso de `ObjectMapper` para pasar de **json** a **objeto**
+
 ### 2024-02-13
 
 - Peticiones HTTP al API REST.
