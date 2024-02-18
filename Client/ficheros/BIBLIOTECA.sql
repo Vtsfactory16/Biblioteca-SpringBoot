@@ -41,3 +41,12 @@ CREATE TABLE historico (
         fecha DATETIME,
         info TEXT
 );
+
+
+DROP TABLE IF EXISTS bibliotecarios;
+CREATE TABLE bibliotecarios (
+		id INTEGER PRIMARY KEY AUTO_INCREMENT,
+        usuario varchar(25) UNIQUE,
+        clave TEXT,
+        activo Boolean
+);
