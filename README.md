@@ -55,6 +55,9 @@ Para comprender cómo hemos utilizado los diversos puntos finales para el enruta
 - `@RequestBody`: Indica que un parámetro del controlador debe estar vinculado al cuerpo de la solicitud HTTP entrante, convirtiéndolo en el tipo de objeto correspondiente.
 
 # Aplicación Cliente (Java Swing) ☕️
+<img src="Client/imagenes/Biblioteca.png" alt="Descripción de la imagen" width="50%">
+
+
 
 La aplicación cliente proporciona una interfaz de usuario amigable para interactuar con la API REST. Incluye:
 
@@ -102,7 +105,12 @@ Estos presentadores actúan como la capa intermedia entre la interfaz de usuario
                                   |     Base de Datos MySQL    |
                                   +----------------------------+
 
-  
+## ✨ Nuevas funcionalidades
+
+- Exportar tablas a csv
+- Imagen de fondo
+- Seleccionar libros pertenecientes a una categoría
+- Eliminar errores molestos  
 
 
 
