@@ -41,20 +41,24 @@ Los controladores gestionan las operaciones relacionadas con su respectiva entid
 Para comprender cómo hemos utilizado los diversos puntos finales para el enrutamiento de las distintas operaciones de una entidad, tomaremos como ejemplo las anotaciones en la clase ControllerCategoria:
 
 ### Anotaciones de Spring 🌱
-- `@RestController`: Indica a Spring que esta clase funcionará como un controlador. Los métodos de esta clase devolverán objetos que se serializarán directamente en el cuerpo de la respuesta HTTP.
-- `@RequestMapping("/biblioteca/categorias")`: Asigna la clase ControllerCategoria a una ruta URI que finaliza con "/biblioteca/categorias".
-- `@GetMapping`: Asigna solicitudes HTTP GET a los métodos de búsqueda (SELECT) dentro del controlador. Para la entidad de categoría, tenemos:
-  - `@GetMapping`: Para el método getAllCategorias(), que devuelve todas las categorías de la base de datos utilizando findAll().
-  - `@GetMapping("/{id}")`: Para el método getCategoriaById(id), que devuelve la categoría de la base de datos utilizando findById(id).
-- `@PostMapping`: Asigna solicitudes HTTP POST al método de guardar (INSERT) dentro del controlador, en este caso, saveCategoria(categoria).
-- `@DeleteMapping("/{id}")`: Asigna solicitudes HTTP DELETE al método de borrar dentro del controlador, en este caso, deleteCategoria(id).
-- `@PutMapping("/{id}")`: Asigna solicitudes HTTP PUT al método de actualizar (UPDATE) dentro del controlador, en este caso, updateCategoria(nuevaCategoria, id).
-- `@Autowired`: Realiza la inyección automática de dependencias en los campos o constructores. Esto evita la necesidad de crear manualmente instancias de objetos, ya que Spring se encarga de ello.
-- `@PathVariable`: Vincula variables de la URI de una solicitud HTTP a los parámetros de un método del controlador, permitiendo que los valores de las partes variables de la URL se pasen como argumentos al método.
-- `@Validated`: Activa la validación de los parámetros de un método del controlador, asegurando que los objetos pasados como argumentos sean validados según las restricciones definidas en las anotaciones de validación de Bean Validation (por ejemplo, @NotNull, @Size, @Email, etc.).
-- `@RequestBody`: Indica que un parámetro del controlador debe estar vinculado al cuerpo de la solicitud HTTP entrante, convirtiéndolo en el tipo de objeto correspondiente.
+
+- `@RestController`: Marca la clase como controlador.
+- `@RequestMapping("/biblioteca/categorias")`: Asigna una ruta a la clase.
+- `@GetMapping`: Maneja solicitudes GET para búsqueda.
+- `@PostMapping`: Maneja solicitudes POST para guardar.
+- `@DeleteMapping("/{id}")`: Maneja solicitudes DELETE para borrar.
+- `@PutMapping("/{id}")`: Maneja solicitudes PUT para actualizar.
+- `@Autowired`: Inyección automática de dependencias.
+- `@PathVariable`: Vincula variables de la URI a los parámetros.
+- `@Validated`: Activa validación de parámetros.
+- `@RequestBody`: Vincula parámetros al cuerpo de la solicitud HTTP.
+
+
 
 # Aplicación Cliente (Java Swing) ☕️
+<img src="Client/imagenes/Biblioteca.png" alt="Descripción de la imagen" width="50%">
+
+
 
 La aplicación cliente proporciona una interfaz de usuario amigable para interactuar con la API REST. Incluye:
 
@@ -102,7 +106,12 @@ Estos presentadores actúan como la capa intermedia entre la interfaz de usuario
                                   |     Base de Datos MySQL    |
                                   +----------------------------+
 
-  
+## ✨ Nuevas funcionalidades
+
+- Exportar tablas a csv
+- Imagen de fondo
+- Seleccionar libros pertenecientes a una categoría
+- Eliminar errores molestos  
 
 
 
