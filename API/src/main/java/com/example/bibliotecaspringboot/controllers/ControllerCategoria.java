@@ -1,8 +1,10 @@
 package com.example.bibliotecaspringboot.controllers;
 
 
+import com.example.bibliotecaspringboot.models.entities.BibliotecariosDTO;
 import com.example.bibliotecaspringboot.models.entities.CategoriaDTO;
 import com.example.bibliotecaspringboot.models.entities.HistoricoDTO;
+import com.example.bibliotecaspringboot.models.repositories.IRepositoryBibliotecarios;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryCategoria;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryHistorico;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +24,22 @@ public class ControllerCategoria {
     IRepositoryCategoria repositoryCategoria;
     IRepositoryHistorico repositoryHistorico;
 
+    IRepositoryBibliotecarios repositoryBibliotecarios;
+
     @Autowired
-    public ControllerCategoria(IRepositoryCategoria repositoryCategoria, IRepositoryHistorico repositoryHistorico) {
+    public ControllerCategoria(IRepositoryCategoria repositoryCategoria, IRepositoryHistorico repositoryHistorico,
+                            IRepositoryBibliotecarios repositoryBibliotecarios) {
         this.repositoryCategoria = repositoryCategoria;
         this.repositoryHistorico = repositoryHistorico;
+        this.repositoryBibliotecarios = repositoryBibliotecarios;
     }
 
     private void insertHistorico(String mensaje) {
-        String user = "admin";
+        String user="";
+        Optional<BibliotecariosDTO> bibliotecario = repositoryBibliotecarios.findBibliotecariosDTOByActivo((byte)1);
+        if (bibliotecario.isPresent()) {
+            user = bibliotecario.get().getUsuario();
+        }
         repositoryHistorico.save(new HistoricoDTO(user , Timestamp.valueOf(LocalDateTime.now()), mensaje));
     }
 

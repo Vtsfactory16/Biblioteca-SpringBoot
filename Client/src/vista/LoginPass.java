@@ -1,5 +1,6 @@
 package vista;
 
+import modelo.http.Login;
 import singleton.Configuracion;
 import vista.helper.SwgAuxiliar;
 
@@ -143,7 +144,7 @@ public class LoginPass extends JDialog implements ActionListener, WindowListener
         try {
             myConf.setUser(eUser.getText());
             myConf.setPassword(String.valueOf(ePass.getPassword()));
-            return true; // TODO Implementar login
+            return Login.loginCheck(myConf.getUser(), myConf.getPassword()); // TODO Implementar login
             // return HibernateUtilJPA.getEntityManagerFactory() != null;
         } catch (Exception e) {
             SwgAuxiliar.msgExcepcion(e);

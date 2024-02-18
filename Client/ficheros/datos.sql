@@ -25,3 +25,7 @@ INSERT INTO usuario VALUES (5,'Pepe','López');
 INSERT INTO prestamos VALUES (1,4,2,'2021-04-17 18:02:50');
 INSERT INTO prestamos VALUES (3,6,4,'2021-03-10 10:02:55');
 INSERT INTO prestamos VALUES (4,7,5,'2021-04-17 18:02:50');
+
+INSERT INTO bibliotecarios VALUES (1,'martina','123', false);
+INSERT INTO bibliotecarios VALUES (2,'manuel','123',false);
+INSERT INTO bibliotecarios VALUES (3,'ridu','123',false);
