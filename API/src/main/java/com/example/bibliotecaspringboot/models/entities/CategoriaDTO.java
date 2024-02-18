@@ -2,6 +2,8 @@ package com.example.bibliotecaspringboot.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -17,6 +19,8 @@ public class CategoriaDTO {
     private int id;
     @Basic
     @Column(name = "categoria", nullable = true, length = -1)
+    @NotBlank(message="La categoria no puede estar vacía")
+    @Size(min = 2, max = 20, message = "La categoria debe tener entre 2 y 20 caracteres")
     private String categoria;
     @OneToMany(mappedBy = "categoria")
     @JsonIgnoreProperties("categoria")

@@ -449,7 +449,7 @@ public class FichaPrestamo extends JInternalFrame implements VistaPrestamo, Acti
         else if (e.getComponent().equals(bSalir))
             FormMain.barraEstado("Pulse esta opción para salir de la ficha del prestamo");
         else if (e.getComponent().equals(bBorrar))
-            FormMain.barraEstado("Antención si pulsa este botón el prestamo será eliminado de la BD, siempre y cuando no tenga préstamos de prestamos");
+            FormMain.barraEstado("Atención si pulsa este botón el prestamo será eliminado de la BD, siempre y cuando no tenga préstamos de prestamos");
     }
 
     @Override
