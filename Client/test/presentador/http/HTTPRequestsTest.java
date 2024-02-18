@@ -12,8 +12,8 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import singleton.Configuracion;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,9 +27,26 @@ class HTTPRequestsTest {
     }
 
     @Test
-    void postUnvalidUsuario() throws Exception {
+    void postInvalidUsuario() {
         Usuario usuario = new Usuario(0, "Sippy", "B");
         assertThrows(Exception.class, () -> new UsuarioRequests().insert(usuario));
+    }
+
+    @Test
+    void postValidPrestamo() throws Exception {
+        Prestamo prestamo = new Prestamo();
+        Libro libro = new LibroRequests().getAll().get(0);
+        Usuario usuario = new UsuarioRequests().getAll().get(0);
+        prestamo.setLibro(libro);
+        prestamo.setUsuario(usuario);
+        prestamo.setFechaPrestamo(Timestamp.valueOf(LocalDateTime.now()));
+        assertDoesNotThrow(() -> new PrestamoRequests().insert(prestamo));
+    }
+
+    @Test
+    void postInvalidPrestamo() throws Exception {
+        Prestamo prestamo = new Prestamo();
+        assertThrows(Exception.class, () -> new PrestamoRequests().insert(prestamo));
     }
 
     @Test
@@ -39,32 +56,13 @@ class HTTPRequestsTest {
 
     @Test
     void jsonToList() {
-
         // Sample JSON string
         String jsonString = "[{\"id\": 1, \"nombre\": \"Book1\", \"autor\": \"Author1\", \"editorial\": \"Publisher1\"}, {\"id\": 2, \"nombre\": \"Book2\", \"autor\": \"Author2\", \"editorial\": \"Publisher2\"}]";
 
         // Initialize ObjectMapper
         ObjectMapper objectMapper = new ObjectMapper();
 
-        // Create a list to store instances of Libro
-        List<Libro> libroList = new ArrayList<>();
-
-        try {
-            // Parse JSON string into an array of Libro objects
-            Libro[] libros = objectMapper.readValue(jsonString, Libro[].class);
-
-            // Add Libro objects to the list
-            for (Libro libro : libros) {
-                libroList.add(libro);
-            }
-
-            // Now libroList contains instances of Libro
-            for (Libro libro : libroList) {
-                System.out.println("ID: " + libro.getId() + ", Nombre: " + libro.getNombre() + ", Autor: " + libro.getAutor() + ", Editorial: " + libro.getEditorial());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        assertDoesNotThrow(() -> objectMapper.readValue(jsonString, Libro[].class));
     }
 
     @Test
@@ -90,6 +88,8 @@ class HTTPRequestsTest {
     @Test
     void postPrestamoObject() throws Exception {
         Prestamo prestamo = new Prestamo(); // default timestamp is now
+        prestamo.setLibro(new LibroRequests().getAll().get(0));
+        prestamo.setUsuario(new UsuarioRequests().getAll().get(0));
         String response = HTTPRequests.postRequest(prestamo.toJSON(), "http://localhost:8080/biblioteca/prestamos");
         JSONObject jsonResponse = new JSONObject(response);
         System.out.println(jsonResponse.get("fechaPrestamo"));
@@ -105,6 +105,22 @@ class HTTPRequestsTest {
     }
 
     @Test
+    void insertCategoria() throws Exception {
+        Categoria categoria = new Categoria();
+        categoria.setCategoria("enemies to lovers");
+        new CategoriaRequests().insert(categoria);
+        assertNotEquals(0, categoria.getId());
+    }
+
+    @Test
+    void insertInvalidCategoria() throws Exception {
+        Categoria categoria = new Categoria();
+        categoria.setCategoria("a");
+        assertThrows(Exception.class, () -> new CategoriaRequests().insert(categoria));
+    }
+
+
+    @Test
     void configTest() throws Exception {
         String url = Configuracion.getInstance().getUrl();
         assertEquals( "http://localhost:8080/biblioteca/", url );
@@ -113,15 +129,15 @@ class HTTPRequestsTest {
     @Test
     void getUsuariosORTest() throws Exception {
         UsuarioDAO requests = new UsuarioRequests();
-        List<Usuario> users = requests.getFiltered(0,"","");
+        List<Usuario> users = requests.getFiltered(1,"","");
         System.out.println(users);
     }
 
     @Test
     void getLibrosORTest() throws Exception {
         LibroDAO requests = new LibroRequests();
-        List<Libro> users = requests.getFiltered(0,"","", "", 0);
-        System.out.println(users);
+        List<Libro> libros = requests.getFiltered(0,"a","", "", 0);
+        System.out.println(libros);
     }
 }
 

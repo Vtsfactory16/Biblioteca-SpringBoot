@@ -81,7 +81,7 @@ public class Usuario implements CsvSerializable{
 
     @Override
     public String toString() {
-        return nombre;
+        return nombre + " " + apellidos;
     }
 
     @Override

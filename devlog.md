@@ -2,6 +2,15 @@
 
 Nuestras hazañas y desgracias :feelsgood:
 
+### 2024-02-18
+
+- Librería `FlatLaf`
+- Creación de Dockerfile
+
+> Crear el contenedor de docker es sencillo pero no he conseguido que se conecte
+> con la base de datos mysql. He probado primero a cambiar la ip de mysql y después
+> he probado conectando los dos contenedores a la misma red Docker.
+
 ### 2024-02-17
 
 - Inserciones en **histórico** desde el resto de controladores

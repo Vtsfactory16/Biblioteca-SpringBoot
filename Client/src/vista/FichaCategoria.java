@@ -127,6 +127,11 @@ public class FichaCategoria extends JInternalFrame implements VistaCategoria, Ke
         }
     }
     private void grabar() {
+        if (eCategoria.getText().length() < 2) {
+            JOptionPane.showMessageDialog(
+                    this,"La categoria debe tener al menos dos caracteres","Atención: ",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         try {
             categoria.setCategoria(eCategoria.getText());
             if (categoria.getId()==0) {
@@ -135,6 +140,7 @@ public class FichaCategoria extends JInternalFrame implements VistaCategoria, Ke
             }
             else presentador.modifica();
             JOptionPane.showMessageDialog(this,"Grabado correctamente!!");
+            dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,e.getMessage(),"Error: ",JOptionPane.ERROR_MESSAGE);
         }
@@ -204,7 +210,7 @@ public class FichaCategoria extends JInternalFrame implements VistaCategoria, Ke
         else if (e.getComponent().equals(bSalir))
             FormMain.barraEstado("Pulse esta opción para salir de la ficha de la categoría");
         else if (e.getComponent().equals(bBorrar))
-            FormMain.barraEstado("Antención si pulsa este botón la categoría será eliminada de la BD, siempre y cuando no tenga préstamos de libros");
+            FormMain.barraEstado("Atención si pulsa este botón la categoría será eliminada de la BD, siempre y cuando no tenga préstamos de libros");
     }
 
     @Override

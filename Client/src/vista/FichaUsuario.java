@@ -158,6 +158,12 @@ public class FichaUsuario extends JInternalFrame implements VistaUsuario, Action
         }
     }
     private void grabar() {
+        if (eNombre.getText().length() < 2 || eApellidos.getText().length() < 2) {
+            JOptionPane.showMessageDialog(
+                    this, "Todos los campos deben tener al menos dos caracteres", "Atención: ", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         try {
             getUsuario().setNombre(eNombre.getText());
             getUsuario().setApellidos(eApellidos.getText());
@@ -167,6 +173,7 @@ public class FichaUsuario extends JInternalFrame implements VistaUsuario, Action
             }
             else presentador.modifica();
             JOptionPane.showMessageDialog(this,"Grabado correctamente!!");
+            dispose();
         } catch (Exception e) {
             SwgAuxiliar.msgExcepcion(e);
         }
@@ -233,7 +240,7 @@ public class FichaUsuario extends JInternalFrame implements VistaUsuario, Action
         else if (e.getComponent().equals(bSalir))
             FormMain.barraEstado("Pulse esta opción para salir de la ficha del usuario");
         else if (e.getComponent().equals(bBorrar))
-            FormMain.barraEstado("Antención si pulsa este botón el usuario será eliminado de la BD, siempre y cuando no tenga préstamos de libros");
+            FormMain.barraEstado("Atención si pulsa este botón el usuario será eliminado de la BD, siempre y cuando no tenga préstamos de libros");
     }
 
     @Override

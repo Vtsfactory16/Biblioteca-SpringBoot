@@ -1,0 +1,8 @@
+docker build -t micro-project-crud .
+docker run -d -p 8080:8080 micro-project-crud
+
+Utilizando una red docker:
+
+docker network create network-project
+docker run -d --name mysql-container --network=network-project -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=BIBLIOTECA mysql:latest
+docker run -d --name micro-project-crud --network=network-project -p 8080:8080 micro-project-crud

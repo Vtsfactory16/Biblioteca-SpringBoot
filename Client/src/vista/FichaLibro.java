@@ -205,6 +205,11 @@ public class FichaLibro extends JInternalFrame implements VistaLibro, ActionList
     }
 
     private void grabar() {
+        if (eTitulo.getText().length() < 2 || eAutor.getText().length() < 2 || eEditorial.getText().length() < 2) {
+            JOptionPane.showMessageDialog(
+                    this, "Todos los campos deben tener al menos dos caracteres", "Atención: ", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         try {
             getLibro().setNombre(eTitulo.getText());
             getLibro().setAutor(eAutor.getText());
@@ -218,6 +223,7 @@ public class FichaLibro extends JInternalFrame implements VistaLibro, ActionList
             }
             else presentador.modifica();
             JOptionPane.showMessageDialog(this,"Grabado correctamente!!");
+            dispose();
         } catch (Exception e) {
             SwgAuxiliar.msgExcepcion(e);
         }
@@ -288,7 +294,7 @@ public class FichaLibro extends JInternalFrame implements VistaLibro, ActionList
         else if (e.getComponent().equals(bSalir))
             FormMain.barraEstado("Pulse esta opción para salir de la ficha del libro");
         else if (e.getComponent().equals(bBorrar))
-            FormMain.barraEstado("Antención si pulsa este botón el libro será eliminado de la BD, siempre y cuando no tenga préstamos de libros");
+            FormMain.barraEstado("Atención si pulsa este botón el libro será eliminado de la BD, siempre y cuando no tenga préstamos de libros");
     }
 
     @Override

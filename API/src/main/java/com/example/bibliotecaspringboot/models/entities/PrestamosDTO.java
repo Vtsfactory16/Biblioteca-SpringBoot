@@ -2,6 +2,7 @@ package com.example.bibliotecaspringboot.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -15,14 +16,18 @@ public class PrestamosDTO {
     private int idPrestamo;
     @Basic
     @Column(name = "fechaprestamo", nullable = true)
+    @NotNull(message = "Imposible insertar un préstamo sin fecha")
     private Timestamp fechaPrestamo;
     @ManyToOne
     @JoinColumn(name = "idlibro", referencedColumnName = "id")
     @JsonIgnoreProperties("prestamos")
+    @NotNull
+    @NotNull(message = "Imposible insertar un préstamo sin libro")
     private LibroDTO libro;
     @ManyToOne
     @JoinColumn(name = "idusuario", referencedColumnName = "id")
     @JsonIgnoreProperties("prestamosById")
+    @NotNull(message = "Imposible insertar un préstamo sin usuario")
     private UsuarioDTO usuario;
 
     public int getIdPrestamo() {
