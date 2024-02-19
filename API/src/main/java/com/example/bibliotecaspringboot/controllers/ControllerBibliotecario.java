@@ -6,7 +6,6 @@ import com.example.bibliotecaspringboot.models.entities.HistoricoDTO;
 import com.example.bibliotecaspringboot.models.entities.LibroDTO;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryBibliotecarios;
 import com.example.bibliotecaspringboot.models.repositories.IRepositoryHistorico;
-import com.example.bibliotecaspringboot.models.repositories.IRepositoryPrestamos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -66,10 +65,7 @@ public class ControllerBibliotecario {
     }
 
 
-    private void insertHistorico(String mensaje) {
-        String user = "admin";
-        repositoryHistorico.save(new HistoricoDTO(user, Timestamp.valueOf(LocalDateTime.now()), mensaje));
-    }
+
 
     private void insertHistorico(String mensaje, String usuario) {
         repositoryHistorico.save(new HistoricoDTO(usuario, Timestamp.valueOf(LocalDateTime.now()), mensaje));
