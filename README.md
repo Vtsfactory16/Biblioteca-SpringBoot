@@ -125,7 +125,7 @@ Estos presentadores actúan como la capa intermedia entre la interfaz de usuario
 ## Dificultades Encontradas  ⚠️ 
 
 - Bucle Infinito : Etiqueta @JsonIgnoreProperties para evitar bucle infinito al generar el Json
-  <div align="center">
+<div align="center">
 <img src="Client/imagenes/jsnonIgnore.png" alt="Descripción de la imagen" width="50%">
 </div>
 
