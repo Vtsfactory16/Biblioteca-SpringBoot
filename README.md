@@ -103,7 +103,15 @@ Estos presentadores actúan como la capa intermedia entre la interfaz de usuario
                                   +----------------------------+
 
   
+## Dificultates Encontradas  ⚠️ 
 
+- Bucle Infinito : Etiqueta @JsonIgnoreProperties para evitar bucle infinito al generar el Json
+  <div align="center">
+<img src="Client/imagenes/jsnonIgnore.png" alt="Descripción de la imagen" width="50%">
+</div>
+
+- Unknown Column in Field List: No existe la columna en la base de datos.
+- Error en el método toJson() de Libro
 
 
 
