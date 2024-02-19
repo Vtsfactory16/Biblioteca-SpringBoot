@@ -26,8 +26,9 @@ una aplicación **cliente** desarrollada en Java Swing.
 </div>
 
 # Conexión a la base de datos:
+<div align="center">
 <img src="Client/imagenes/Conexion.png" alt="Descripción de la imagen" width="50%">
-
+</div>
 
 # Aplicación Spring Boot (API REST) ⚙️
 
@@ -58,11 +59,15 @@ Para comprender cómo hemos utilizado los diversos puntos finales para el enruta
 - `@RequestBody`: Vincula parámetros al cuerpo de la solicitud HTTP.
 
 ## Mapeo 
-<img src="Client/imagenes/mapeo.png" alt="Descripción de la imagen" width="50%">
-
+<div align="center">
+<img src="Client/imagenes/mapeo.png" alt="Descripción de la imagen" width="70%">
+</div>
 
 # Aplicación Cliente (Java Swing) ☕️
+<div align="center">
 <img src="Client/imagenes/Biblioteca.png" alt="Mapeo de imágenes" width="50%">
+</div>
+
 
 La aplicación cliente proporciona una interfaz de usuario amigable para interactuar con la API REST. Incluye:
 
