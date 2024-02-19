@@ -57,12 +57,12 @@ Para comprender cómo hemos utilizado los diversos puntos finales para el enruta
 - `@Validated`: Activa validación de parámetros.
 - `@RequestBody`: Vincula parámetros al cuerpo de la solicitud HTTP.
 
+## Mapeo 
+<img src="Client/imagenes/mapeo.png" alt="Descripción de la imagen" width="50%">
 
 
 # Aplicación Cliente (Java Swing) ☕️
-<img src="Client/imagenes/Biblioteca.png" alt="Descripción de la imagen" width="50%">
-
-
+<img src="Client/imagenes/Biblioteca.png" alt="Mapeo de imágenes" width="50%">
 
 La aplicación cliente proporciona una interfaz de usuario amigable para interactuar con la API REST. Incluye:
 
@@ -82,6 +82,11 @@ Clases para realizar operaciones CRUD en cada entidad:
 
 Estos presentadores actúan como la capa intermedia entre la interfaz de usuario y las solicitudes HTTP, gestionando la lógica de negocio y la presentación de datos.
 
+## Librerias utilizadas 📚
+
+- **Jackson** Para transformar json en objetos (`ObjectMapper`)
+- **Json** Para manipular fácilmente objetos json (`JSONObject` y `JSONArray`)
+- **JUnit** Para realizar pruebas
 
 ### Esquema Conceptual 🌍
 
@@ -116,9 +121,6 @@ Estos presentadores actúan como la capa intermedia entre la interfaz de usuario
 - Imagen de fondo
 - Seleccionar libros pertenecientes a una categoría
 - Eliminar errores molestos  
-
-
-
 
 ## 🚀 Instrucciones de Uso
 
