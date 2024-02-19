@@ -103,7 +103,7 @@ Estos presentadores actúan como la capa intermedia entre la interfaz de usuario
                                   +----------------------------+
 
   
-## Dificultates Encontradas  ⚠️ 
+## Dificultades Encontradas  ⚠️ 
 
 - Bucle Infinito : Etiqueta @JsonIgnoreProperties para evitar bucle infinito al generar el Json
   <div align="center">
