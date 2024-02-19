@@ -119,6 +119,8 @@ Estos presentadores actúan como la capa intermedia entre la interfaz de usuario
                                   +----------------------------+
                                   |     Base de Datos MySQL    |
                                   +----------------------------+
+
+# Información adicional
   
 ## Dificultades Encontradas  ⚠️ 
 
